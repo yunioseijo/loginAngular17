@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { authGuardMatch } from './guards/auth.guard';
+import { PageNotFoundComponent } from './componentes/page-not-found/page-not-found.component';
+import { HomeComponent } from './componentes/home/home.component';
 
 export const routes: Routes = [
     {
@@ -13,9 +15,17 @@ export const routes: Routes = [
         canMatch: [authGuardMatch]
     },
     {
+        path: 'home',
+         component: HomeComponent
+    },
+    {
 
         path: '',
-        redirectTo: '/login',
+        redirectTo: '/home',
         pathMatch: 'full'
-    }
+    },
+    {
+        path: '**',
+         component: PageNotFoundComponent
+    },
 ];
