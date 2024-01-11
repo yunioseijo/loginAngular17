@@ -77,7 +77,8 @@ export default class LoginComponent implements OnInit {
         this.storageService.saveUser(data);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.router.navigate(['/profile']);
+        // this.router.navigate(['/profile']);
+        console.log('login ok')
         this.router.navigate(['/home']);
       },
       error: (err) => {

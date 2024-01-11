@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GlobalService } from './global.service';
 import { StorageService } from './storage.service';
+import { UserDto } from '../Models/user.model';
 
 const API_URL = 'http://localhost:8080/api/test/';
 
@@ -14,12 +15,13 @@ export class UserService {
   public storageService = inject(StorageService);
   constructor(private http: HttpClient) {}
 
-  getCurrentUser(): Observable<any> {
+  getCurrentUser(){
     // return this.http.post(this.global.PORTAL_API_URL() + '/Auth/CurrentUser',{}, this.storageService.AUTH_CONFIG());
+    console.log('LLamada al current User');
     return this.http.post(this.global.PORTAL_API_URL() + '/Auth/CurrentUser',{} );
   }
 
-  checkProfile(profile: string): Observable<any> {    
+  checkProfile(profile: number): Observable<any> {    
     return this.http.post(this.global.PORTAL_API_URL() + '/Auth/CheckRole',{ params: { profiles: profile } }, this.storageService.AUTH_CONFIG());
   }
   hasProfile(profile: number, perfilObjetivo: number): boolean{

@@ -36,6 +36,7 @@ export class AuthService {
     return this.http.get('/api/auth/logout');
   }
 
+
   public isLoggedIn(): boolean {
     let accesToken = localStorage.getItem("AccessToken");
     // const user = window.sessionStorage.getItem(USER_KEY);

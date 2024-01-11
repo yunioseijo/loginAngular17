@@ -9,8 +9,10 @@ export class StorageService {
   constructor() {}
 
   clean(): void {
+    console.log('Borro los datos de localsotarage y session');
+    window.localStorage.clear();
+    localStorage.removeItem('AccessToken');
     window.sessionStorage.clear();
-    localStorage.clear();
   }
 
   public saveUser(user: any): void {
