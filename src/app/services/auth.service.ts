@@ -32,7 +32,8 @@ export class AuthService {
 
 
     logout(): Observable<any> {
-    return this.http.post(this.global.PORTAL_API_URL()+'/Auth/' + 'signout', { }, httpOptions);
+      //TODO: esto no funciona porque no existe ese endpoint
+    return this.http.get('/api/auth/logout');
   }
 
   public isLoggedIn(): boolean {

@@ -1,0 +1,9 @@
+{
+    "/api": {
+      "target": "http://infinitebackup.gigas.com:9980",
+      "secure": false,
+      "changeOrigin": true,
+      "headers": { "Connection": "keep-alive" },
+      "logLevel": "debug"
+    }
+  }

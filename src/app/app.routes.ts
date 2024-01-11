@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuardMatch } from './guards/auth.guard';
+import { authGuard, authGuardMatch } from './guards/auth.guard';
 import { PageNotFoundComponent } from './componentes/page-not-found/page-not-found.component';
 import { HomeComponent } from './componentes/home/home.component';
 
@@ -12,11 +12,13 @@ export const routes: Routes = [
     {
         path: 'profile',
         loadComponent: () => import('./profile-editor/profile-editor.component'),//lo puedo hacer de esta manera porque exporto la clase por defecto
-        canMatch: [authGuardMatch]
+        // canMatch: [authGuardMatch]
+        canActivate: [authGuard]
     },
     {
         path: 'home',
-         component: HomeComponent
+         component: HomeComponent,
+         canActivate: [authGuard]
     },
     {
 

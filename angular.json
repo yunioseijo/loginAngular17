@@ -60,7 +60,8 @@
               "buildTarget": "loginAngular17:build:production"
             },
             "development": {
-              "buildTarget": "loginAngular17:build:development"
+              "buildTarget": "loginAngular17:build:development",
+              "proxyConfig": "src/proxy.config.json"
             }
           },
           "defaultConfiguration": "development"
@@ -69,6 +70,7 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "buildTarget": "loginAngular17:build"
+            
           }
         },
         "test": {

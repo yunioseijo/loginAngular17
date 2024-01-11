@@ -15,7 +15,8 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getCurrentUser(): Observable<any> {
-    return this.http.post(this.global.PORTAL_API_URL() + '/Auth/CurrentUser',{}, this.storageService.AUTH_CONFIG());
+    // return this.http.post(this.global.PORTAL_API_URL() + '/Auth/CurrentUser',{}, this.storageService.AUTH_CONFIG());
+    return this.http.post(this.global.PORTAL_API_URL() + '/Auth/CurrentUser',{} );
   }
 
   checkProfile(profile: string): Observable<any> {    
