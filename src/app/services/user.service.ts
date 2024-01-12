@@ -15,14 +15,14 @@ export class UserService {
   public storageService = inject(StorageService);
   constructor(private http: HttpClient) {}
 
-  getCurrentUser(){
+  getCurrentUser(): Observable<any> {
     // return this.http.post(this.global.PORTAL_API_URL() + '/Auth/CurrentUser',{}, this.storageService.AUTH_CONFIG());
     console.log('LLamada al current User');
     return this.http.post(this.global.PORTAL_API_URL() + '/Auth/CurrentUser',{} );
   }
 
   checkProfile(profile: number): Observable<any> {    
-    return this.http.post(this.global.PORTAL_API_URL() + '/Auth/CheckRole',{ params: { profiles: profile } }, this.storageService.AUTH_CONFIG());
+    return this.http.post(this.global.PORTAL_API_URL() + '/Auth/CheckRole',{ params: { profiles: profile } });
   }
   hasProfile(profile: number, perfilObjetivo: number): boolean{
     return (profile & perfilObjetivo) != 0;

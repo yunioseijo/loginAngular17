@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
 import { authGuard,authGuard2, authGuardMatch } from './guards/auth.guard';
 import { AuthGuard, } from './guards/authasync.guard';
-import { PageNotFoundComponent } from './componentes/page-not-found/page-not-found.component';
-import { HomeComponent } from './componentes/home/home.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { HomeComponent } from './components/home/home.component';
 
 export const routes: Routes = [
     {
         path: 'login',
-        loadComponent: () => import('./login/login.component'),//lo puedo hacer de esta manera porque exporto la clase por defecto
+        loadComponent: () => import('./components/login/login.component'),//lo puedo hacer de esta manera porque exporto la clase por defecto
        
     },
     {

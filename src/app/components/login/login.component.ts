@@ -1,12 +1,12 @@
 import { Component, OnInit, Inject, inject } from '@angular/core';
 
-import { StorageService } from '../services/storage.service';
+import { StorageService } from '../../services/storage.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { BrandingService } from '../services/branding.service';
-import { NavmenuComponent } from '../componentes/navmenu/navmenu.component';
+import { BrandingService } from '../../services/branding.service';
+import { NavmenuComponent } from '../navmenu/navmenu.component';
 
 
 @Component({
