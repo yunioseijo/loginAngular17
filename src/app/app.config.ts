@@ -10,8 +10,6 @@ export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withViewTransitions({
         skipInitialTransition: true,
     })),
-    provideHttpClient(
-      withInterceptors([authInterceptor,]),
-    ),
-    importProvidersFrom(HttpClientModule), provideAnimations()]
+    provideHttpClient(withInterceptors([authInterceptor,])),
+    importProvidersFrom(HttpClientModule), provideAnimations(), provideAnimations()]
 };
