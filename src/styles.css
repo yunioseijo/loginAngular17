@@ -1,9 +1,17 @@
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .bg-secondary-color{
     background: var(--secondary-color);
+}
+
+.group:hover .group-hover\:fill-secondary-color{
+    fill: var(--secondary-color);
+}
+.\!fill-secondary-color {
+    fill: var(--secondary-color);
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

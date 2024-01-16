@@ -25,14 +25,8 @@ export default class LoginComponent implements OnInit {
   // loginForm!: FormGroup;
 
   loginForm = new FormGroup({
-    emailLoginForm: new FormControl<string>('partner@gigas.com', [
-      Validators.email,
-      Validators.required,
-    ]),
-    passwordLoginForm: new FormControl<string>('1234', [
-      Validators.minLength(3),
-      Validators.required,
-    ]),
+    emailLoginForm:     new FormControl<string>('partner@gigas.com', [Validators.email, Validators.required,]           ),
+    passwordLoginForm:  new FormControl<string>('1234',              [ Validators.minLength(3),  Validators.required,]  ),
   });
 
   isLoggedIn = false;

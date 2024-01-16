@@ -5,6 +5,7 @@ import { AuthService } from './services/auth.service';
 import { BrandingService } from './services/branding.service';
 import { StorageService } from './services/storage.service';
 import { UserService } from './services/user.service';
+import { IBrandingInformation } from './Models/branding.model';
 
 
 
@@ -59,6 +60,24 @@ export class AppComponent {
   //   }
   // }
   console.log('on it appComponent');
-}
+  
+    // this.generateFormLogin();
+    this.brandingService.getBrandingInformation().subscribe({
+      next: (data: IBrandingInformation) => {
+        const {PrimaryColor, SecondaryColor} = data;
+        document.documentElement.style.setProperty('--primary-color',PrimaryColor);
+        document.documentElement.style.setProperty('--secondary-color',SecondaryColor);
+        console.log('PrimaryColor',PrimaryColor);
+        console.log('BrandiingInformation', data);
+      },
+      error: (err) => {
+        console.log('Error brandingINformation')
+      },
+    });
+
+
+  }
+
+
 
 }
