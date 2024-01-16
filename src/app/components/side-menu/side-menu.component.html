@@ -1,11 +1,11 @@
 <!-- component -->
-<aside class="w-72 bg-[#1c212c] min-h-full h-screen flex flex-col items-center pt-5 pb-2 space-y-7">
+<aside class=" bg-[#1c212c] min-h-full h-screen flex flex-col items-center pt-5 pb-2 space-y-7">
 
     <!-- menu items -->
     <div class="w-full pr-3 flex flex-col gap-y-1 text-gray-500 fill-gray-500 text-sm">
         <div class="w-full flex items-center gap-x-1.5 group select-none">
 
-            <div class="font-QuicksandMedium pl-4 text-gray-400/60 text-xs text-[11px] uppercase">Menu</div>
+            <div class="font-QuicksandMedium pl-4 text-gray-400/60 text-xs text-[11px] uppercase">General</div>
             <app-avatar></app-avatar>
         </div>
 
@@ -14,16 +14,43 @@
                 <div class="absolute top-0 left-0 w-full h-[102%] group-hover:translate-y-0 translate-y-0 bg-secondary-color transition-all duration-300"></div>
             </div>
             <div class="bg-white/10 text-white group-hover:bg-white/10 w-full group-active:scale-95 self-stretch pl-2 rounded flex items-center space-x-2 transition-all duration-200 dark:group-hover:text-white dark:hover:text-white text-sm" href="#">                    
-                <svg class="h-5 w-5 !fill-secondary-color group-hover:fill-secondary-color dark:fill-gray-600  transition-colors duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M5 22h14a2 2 0 0 0 2-2v-9a1 1 0 0 0-.29-.71l-8-8a1 1 0 0 0-1.41 0l-8 8A1 1 0 0 0 3 11v9a2 2 0 0 0 2 2zm5-2v-5h4v5zm-5-8.59 7-7 7 7V20h-3v-5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v5H5z"></path>
+                <svg class="h-5 w-5 !fill-secondary-color group-hover:fill-secondary-color dark:fill-gray-600  transition-colors duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path d="M425.7,118.25A240,240,0,0,0,76.32,447l.18.2c.33.35.64.71,1,1.05.74.84,1.58,1.79,2.57,2.78a41.17,41.17,0,0,0,60.36-.42,157.13,157.13,0,0,1,231.26,0,41.18,41.18,0,0,0,60.65.06l3.21-3.5.18-.2a239.93,239.93,0,0,0-10-328.76ZM240,128a16,16,0,0,1,32,0v32a16,16,0,0,1-32,0ZM128,304H96a16,16,0,0,1,0-32h32a16,16,0,0,1,0,32Zm48.8-95.2a16,16,0,0,1-22.62,0l-22.63-22.62a16,16,0,0,1,22.63-22.63l22.62,22.63A16,16,0,0,1,176.8,208.8Zm149.3,23.1-47.5,75.5a31,31,0,0,1-7,7,30.11,30.11,0,0,1-35-49l75.5-47.5a10.23,10.23,0,0,1,11.7,0A10.06,10.06,0,0,1,326.1,231.9Zm31.72-23.1a16,16,0,0,1-22.62-22.62l22.62-22.63a16,16,0,0,1,22.63,22.63ZM423.7,436.4h0ZM416,304H384a16,16,0,0,1,0-32h32a16,16,0,0,1,0,32Z"></path>
                 </svg>
 
 
-                <span class="font-QuicksandMedium">Home</span>
+                <span class="font-QuicksandMedium">Dashboard</span>
             </div>
         </div>
 
-        <div class="w-full flex items-center gap-x-1.5 group select-none">
+        
+
+        
+            @for (item of menuItems; track item.path) {
+                <div class=" flex items-center gap-x-1.5 group select-none">
+                    <div class="w-1 rounded-xl h-8 bg-transparent transition-colors duration-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-[102%] translate-y-full group-hover:translate-y-0 bg-secondary-color transition-all duration-300"></div>
+                    </div>
+                    <a 
+                    [routerLink]="item.path" routerLinkActive=""
+                    class="group-hover:bg-white/10 w-full group-active:scale-95 self-stretch pl-2 rounded flex items-center space-x-2 transition-all duration-200 dark:group-hover:text-white dark:hover:text-white text-sm" href="#"
+                    >
+                <!-- <div [innerHTML]="getSafeHtml(item.icon)"></div> -->
+                    <div [innerHTML]="item.icon | safeHtml"></div>                    
+                    <span class="font-QuicksandMedium">{{item.title}}</span> 
+                    
+                    </a>
+               
+            </div>
+            }
+        </div>
+       
+         
+         
+     
+        
+
+        <!-- <div class="w-full flex items-center gap-x-1.5 group select-none">
             <div class="w-1 rounded-xl h-8 bg-transparent transition-colors duration-200 relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-[102%] translate-y-full group-hover:translate-y-0 bg-secondary-color transition-all duration-300"></div>
             </div>
@@ -34,11 +61,11 @@
                         <path d="M11 6h2v2h-2Zm4 0h2v2h-2Zm0 4.03h2v1.96h-2Zm0 3.96h2v2h-2Zm-8 1h2v2H7Z"></path>
                     </g>
                 </svg>
-                <span class="font-QuicksandMedium">Discovery</span>
+                <span class="font-QuicksandMedium">Users</span>
             </div>
-        </div>
+        </div> -->
 
-        <div class="w-full flex items-center gap-x-1.5 group select-none">
+        <!-- <div class="w-full flex items-center gap-x-1.5 group select-none">
             <div class="w-1 rounded-xl h-8 bg-transparent transition-colors duration-200 relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-[102%] translate-y-full group-hover:translate-y-0 bg-secondary-color transition-all duration-300"></div>
             </div>
@@ -50,11 +77,11 @@
                     <path d="M16 21H14C14 18.2386 11.7614 16 9 16C6.23858 16 4 18.2386 4 21H2C2 17.134 5.13401 14 9 14C12.866 14 16 17.134 16 21Z"></path>
                 </svg>
 
-                <span class="font-QuicksandMedium">Friends</span>
+                <span class="font-QuicksandMedium">Updates</span>
             </div>
-        </div>
+        </div> -->
 
-        <div class="w-full flex items-center gap-x-1.5 group select-none">
+        <!-- <div class="w-full flex items-center gap-x-1.5 group select-none">
             <div class="w-1 rounded-xl h-8 bg-transparent transition-colors duration-200 relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-[102%] translate-y-full group-hover:translate-y-0 bg-secondary-color transition-all duration-300"></div>
             </div>
@@ -63,10 +90,10 @@
                     <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C21.9939 17.5203 17.5203 21.9939 12 22ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C19.995 7.58378 16.4162 4.00496 12 4ZM17 13H11V7H13V11H17V13Z"></path>
                 </svg>
 
-                <span class="font-QuicksandMedium">Coming soon</span>
+                <span class="font-QuicksandMedium">Computers</span>
             </div>
-        </div>
-    </div>
+        </div> -->
+    
 
     <!-- menu items -->
     <div class="w-full pr-3 flex flex-col gap-y-1 text-gray-500 fill-gray-500 text-sm">

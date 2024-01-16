@@ -9,6 +9,6 @@ import {MatButtonModule} from '@angular/material/button';
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
-export class UserComponent {
+export default class UserComponent {
 
 }
