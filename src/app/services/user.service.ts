@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GlobalService } from './global.service';
 import { StorageService } from './storage.service';
-import { UserDto } from '../Models/user.model';
+import { IUserResponse } from '../Models/user.model';
 
 const API_URL = 'http://localhost:8080/api/test/';
 

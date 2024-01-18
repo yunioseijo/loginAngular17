@@ -10,7 +10,7 @@ import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 import { UserService } from '../services/user.service';
 import { Observable, catchError, map, mergeMap, of, switchMap } from 'rxjs';
-import { UserDto } from '../Models/user.model';
+import { IUserResponse } from '../Models/user.model';
 import { HttpResponse } from '@angular/common/http';
 
 export const authGuard2: CanActivateFn = (route, state) => {

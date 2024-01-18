@@ -1,4 +1,4 @@
-export interface UserDto {
+export interface IUserResponse {
   UserId: number;
   Profiles: number;
   Email: string;
