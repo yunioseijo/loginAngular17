@@ -9,8 +9,21 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   let clonedRequest = req;
   const storageservice = inject(StorageService);
   const globalservice = inject(GlobalService);
+
+  // Lista de URLs para las que no se debe agregar la autenticación
+  const excludedUrls = [
+    'https://api.ejemplo.com/publico',
+    'https://otroapi.ejemplo.com/sin-autenticacion',
+    // Puedes agregar más URLs aquí
+    'https://yvl-webadmin.azurewebsites.net/api/user/l',
+    'http://localhost:3000/'
+  ];
+
+  // Verifica si la URL actual está en la lista de excluidos
+  const isExcludedUrl = excludedUrls.some(url => req.url.startsWith(url));
+  console.log('isExcludedUrl',isExcludedUrl);
   
-  if (storageservice.isLoggedIn()) {
+  if (storageservice.isLoggedIn() && !isExcludedUrl ) {
 
     clonedRequest = req.clone({
       setHeaders: {
@@ -23,13 +36,4 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(clonedRequest);
 };
 
-// export const interceptErrorLogin: Observable<HttpEvent<any>> = (request: HttpRequest<any>, next: HttpHandler) => {
-//   return next.handle(request).pipe(
-//     catchError((error: HttpErrorResponse) => {
-//       if (error.status === 401) {
-//         this.router.navigate(['/login']);
-//       }
-//       return Observable.throw(error);
-//     }),
-//   );
-// }
+
