@@ -5,5 +5,13 @@
       "changeOrigin": true,
       "headers": { "Connection": "keep-alive" },
       "logLevel": "debug"
+    },
+    "/yvl-webadmin": {
+      "target": "https://yvl-webadmin.azurewebsites.net/api/",
+      "secure": false,
+      "changeOrigin": true,
+      "headers": { "Connection": "keep-alive" },
+      "logLevel": "debug"
     }
+   
   }
