@@ -5,11 +5,11 @@ export interface IUserListResponse {
     Page:             number;
     PageSize:         number;
     PageCount:        number;
-    Items:            UserInfoResponse[];
+    Items:            IUserInfoResponse[];
     ExtendedDetails:  null;
 }
 
-export interface UserInfoResponse {
+export interface IUserInfoResponse {
     UserId:                     string;
     Name:                       string;
     Email:                      string;
@@ -27,4 +27,65 @@ export interface UserInfoResponse {
     LastOnlineDate:             null | string;
     IsDeleted:                  boolean;
     IsIntegrator:               boolean;
+}
+export interface IUserListFilterRequest {
+    FreeText: string,
+    HasDrivesUploading: true,
+    HasDrivesProcessingUpload: true,
+    HasDrivesBrowsable: true,
+    Partner: string,
+    ShowDeleted: true,
+    ShowFromLoozend: true,
+    ShowFromIntegrators: true,
+    ShowFromWhitebrand: true,
+    ConnectionStatus: number,
+    PartnerStatus: number
+  }
+  export class UserListFilterRequest {
+    FreeText: string | undefined;
+    HasDrivesUploading: true | undefined;
+    HasDrivesProcessingUpload: true | undefined;
+    HasDrivesBrowsable: true | undefined;
+    Partner: string | undefined;
+    ShowDeleted: true | undefined;
+    ShowFromLoozend: true | undefined;
+    ShowFromIntegrators: true | undefined;
+    ShowFromWhitebrand: true | undefined;
+    ConnectionStatus: number | undefined;
+    PartnerStatus: number | undefined;
+
+    constructor() {
+        this.FreeText = "";
+        this.HasDrivesUploading = true;
+        this.HasDrivesProcessingUpload = true;
+        this.HasDrivesBrowsable = true;
+        this.Partner = "";
+        this.ShowDeleted = true;
+        this.ShowFromLoozend = true;
+        this.ShowFromIntegrators = true;
+        this.ShowFromWhitebrand = true;
+        this.ConnectionStatus = 0;
+        this.PartnerStatus = 0;
+      }
+  }
+
+export interface IUserListFilterRequest2 {
+    Filter: IFilter;
+    Order:  IOrder;
+    Paging: IPaging;
+}
+
+export interface IFilter {
+    ConnectionStatus: string;
+    PartnerStatus:    string;
+}
+
+export interface IOrder {
+    IsAscending: boolean;
+    FieldName:   string;
+}
+
+export interface IPaging {
+    Page:     number;
+    PageSize: number;
 }

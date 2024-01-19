@@ -77,7 +77,7 @@ export const authGuard: CanActivateFn = () => {
   }
 
   return userService.getCurrentUser().pipe(
-    switchMap((user) => userService.checkProfile(user.Profiles)),
+    switchMap((user) => userService.checkProfile(user.Profile)),
     map((response) => {
       // Aquí puedes manejar la lógica en base al estado de la respuesta
       return true; // O false, dependiendo de tu lógica específica

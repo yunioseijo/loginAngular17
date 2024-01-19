@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { routes } from '../../app.routes';
 import { SafeHtmlPipe } from '../../Pipes/safehtml.pipe';
 import { DomSanitizer } from '@angular/platform-browser';
+import { IUserListFilterRequest, UserListFilterRequest } from '../../Models/userList.model';
 
 
 
@@ -32,4 +33,5 @@ export class SideMenuComponent {
         console.log(html);
         return this.sanitizer.bypassSecurityTrustHtml(html);
     }
-}
+ 
+  }

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GlobalService } from './global.service';
 import { ILogin } from '../Models/login.model';
+import { IAuthenticatedUserResponse } from '../Models/user.model';
 
 // const AUTH_API = 'http://infinitebackup.gigas.com:9080/Auth/';
 
@@ -56,4 +57,5 @@ export class AuthService {
     }
     return false;
   }
+ 
 }

@@ -1,0 +1,26 @@
+.drive-count-status-uploading {
+    color: #e2a600;
+}
+
+.drive-count-status {
+    margin: 0 5px 0 0;
+}
+
+.drive-count-status-processing {
+    color: #497794;
+}
+
+.drive-count-status-space {
+    margin: 0 5px;
+}
+.drive-count-status-browsable {
+    color: #10b031;
+}
+.drive-count-status-excluded {
+    color: #e84545;
+}
+.header-cell {
+    font-weight: 700;
+    color: #555;
+    cursor: pointer;
+}
