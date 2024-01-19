@@ -8,6 +8,13 @@
 
      
         <ul>
+          @if(userName){
+            <li class="px-3 py-3 text-sm font-medium flex items-center space-x-2 hover:user cursor-pointer  hover:bg-slate-400">
+             
+              <span> {{userName}} </span>
+            </li>
+          }
+
           <li class="px-3 py-3 text-sm font-medium flex items-center space-x-2 hover:user cursor-pointer  hover:bg-slate-400">
             <span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
@@ -20,7 +27,7 @@
             </span>
             <span> Setting </span>
           </li>
-
+        
           <li (click)="logout()" class="px-3  py-3 text-sm font-medium flex items-center space-x-2  hover:user cursor-pointer hover:bg-slate-400">
             <span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"

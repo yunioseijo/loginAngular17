@@ -1,9 +1,10 @@
-import { Component, ElementRef, HostListener, inject, signal } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, inject, signal } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
 import { Router } from '@angular/router';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -13,16 +14,28 @@ import {MatButtonModule} from '@angular/material/button';
   templateUrl: './avatar.component.html',
   styleUrl: './avatar.component.css'
 })
-export class AvatarComponent {
+export class AvatarComponent implements OnInit {
+  ngOnInit(): void {
+    
+  this.userService.getCurrentUser().subscribe({
+    next: (user) => {
+      console.log(user);
+      this.userName=user.Email;
+    }
+  })
+  }
   // public showContent = signal(false);
   public authService = inject(AuthService);
+  public userService = inject(UserService);
   public storageService = inject(StorageService);
   public router = inject(Router);
   public eRef = inject(ElementRef);
 
+
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
+  userName = '';
 
   
   logout() {
