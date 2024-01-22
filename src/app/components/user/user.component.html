@@ -1,75 +1,62 @@
 <!-- user-list.component.html -->
-<div class="container">
-    <div class="actions">
-        <button class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-secondary-color   rounded shadow ripple hover:shadow-lg hover:bg-secondary-color hover:text-black focus:outline-none"
-          >
-            Descargar 
-          </button>
-        <a class="button" routerLink="/user/new"><i class="fas fa-plus"></i> Crear Usuario</a>
-        <!-- Añadir otros botones y acciones según sea necesario -->
+<div id="user-list" class="grid grid-cols-1 md:grid-cols-12">
+    <div class="row-start-1 row-end-2 col-start-1 col-end-13">
     </div>
 
-    
-    @for(userInfo of userInfoResponse; track userInfo.Email){
-        <table class="table-auto w-full p-1 border-2">
-                <tr >
-                    <td class="p-0" >
-                        <table class="table-auto w-full">
-                            <tr class="bg-gray-100 text-left" >
-                                <td class="px-3 py-4 whitespace-nowrap text-left w-1/4 header-cell ">Email</td>
-                                <td class="px-3 py-4 whitespace-nowrap text-left w-1/4 ">{{ userInfo.Email }}</td>
-                                <td class="px-3 py-4 whitespace-nowrap text-left w-1/4 header-cell ">Fecha de Creación</td>
-                                <td class="px-3 py-4 whitespace-nowrap text-left w-1/4">{{ userInfo.CreatedDate | date }}</td>
-                            </tr>
+    <div class="col-span-1 md:col-span-9 bg-white">
+        <div class="flex justify-end my-4 mr-2">
+            <!-- 
+                Asi puedo usar el componente button que creé.
+                <ysm-forms-button title="New" icon="fas fa-file-download" customClasses="rounded" (nombreOuput1)="onButtonClickDelOutput($event)"></ysm-forms-button> 
+            -->
+            <button class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center
+                 uppercase transition  rounded  ripple 
+                 hover:shadow hover:bg-gray-200 hover:text-black focus:outline-none">
+                <i class="fas fa-file-download"></i> CSV</button>
+            <a class="button px-6 py-2 text-xs font-medium leading-6 text-center
+        uppercase transition  rounded  ripple hover:shadow hover:bg-gray-200 hover:text-black focus:outline-none"
+                routerLink="/user/new"><i class="fas fa-plus"></i> Create</a>
+        </div>
+        <div class="overflow-x-auto">
+        <table class="min-w-ful table-fixed md:table-auto">
+            <tr class="flex flex-col flex-no wrap sm:table-row">
+                <th class="px-3 py-4 whitespace-nowrap text-left header-cell ">Email</th>
+                <th class="px-3 py-4 whitespace-nowrap text-left header-cell ">Fecha de Creación</th>
+                <th class="px-3 py-4 whitespace-nowrap text-left header-cell ">ID</th>
+                <th class="px-3 py-4 whitespace-nowrap text-left header-cell ">Partner</th>
+                <th class="px-3 py-4 whitespace-nowrap text-left header-cell ">Culture</th>
+                <th class="px-3 py-4 whitespace-nowrap text-left header-cell ">IP</th>
+                <th class="px-3 py-4 whitespace-nowrap text-left header-cell ">Drives</th>
+            </tr>
+            <tbody class="bg-white ">
+            @for(userInfo of userInfoResponse; track $index){
+            <tr  class="flex flex-col flex-no wrap sm:table-row">
+                <td class="px-3 py-4 text-wrap text-left ">{{ userInfo.Email }}</td>
+                <td class="px-3 py-4 text-wrap text-left">{{ userInfo.CreatedDate | date:'medium' }}</td>
+                <td class="px-3 py-4 text-wrap text-left ">{{ userInfo.UserId }}</td>
+                <td class="px-3 py-4 text-wrap text-left ">{{ userInfo.PartnerName }}</td>
+                <td class="px-3 py-4 text-wrap ">{{ userInfo.Culture}}</td>
+                <td class="px-3 py-4 text-wrap ">{{ userInfo.SourceIp}}</td>
+                <td class="">
+                    <i class="fas fa-chevron-circle-up drive-count-status drive-count-status-uploading"></i>
+                    {{userInfo.DriveCountUploading}}
+                    <i class="fas fa-minus-circle drive-count-status-space drive-count-status-processing"></i>
+                    {{userInfo.DriveCountProcessingUpload}}
+                    <i class="fas fa-chevron-circle-down drive-count-status-space drive-count-status-browsable"></i>
+                    {{userInfo.DriveCountBrowsable}}
+                    <i class="fas fa-stop-circle drive-count-status-space drive-count-status-excluded"></i>
+                    {{userInfo.DriveCountExcluded}}
+                </td>
+            </tr>
+            }
+            </tbody>
+        </table>
+    </div>
 
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p-0" >
-                        <table class="table-auto w-full">
-                            <tr class="bg-gray-100 text-left " >
-                                <td class="px-3 py-4 whitespace-nowrap text-left w-1/4 header-cell ">Id</td>
-                                <td class="px-3 py-4 whitespace-nowrap text-left w-1/4 ">{{ userInfo.UserId }}</td>
-                                <td class="px-3 py-4 whitespace-nowrap text-left w-1/4 header-cell ">Partner</td>
-                                <td class="px-3 py-4 whitespace-nowrap text-left w-1/4 ">{{ userInfo.PartnerName}}</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p-0" >
-                        <table class="table-auto w-full " >
-                            <tr class="bg-gray-100 ">
-                                <td class="px-3 py-4 whitespace-nowrap w-1/4 header-cell">Culture</td>
-                                <td class="px-3 py-4 whitespace-nowrap w-1/4 ">{{ userInfo.Culture}}</td>
-                                <td class="px-3 py-4 whitespace-nowrap w-1/4 header-cell">Ip</td>
-                                <td class="px-3 py-4 whitespace-nowrap w-1/4 ">{{ userInfo.SourceIp}}</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-           
-                <tr>
-                    <td class="p-0" >
-                        <table class="table-auto w-full " >
-                            <tr class="bg-gray-100 ">
-                                <td class="px-3 py-4 whitespace-nowrap w-1/4 header-cell">Drive</td>
-                                <td class="">
-                                    <i class="fas fa-chevron-circle-up drive-count-status drive-count-status-uploading"></i>{{userInfo.DriveCountUploading}}
-                                    <i class="fas fa-minus-circle drive-count-status-space drive-count-status-processing"></i>{{userInfo.DriveCountProcessingUpload}}
-                                    <i class="fas fa-chevron-circle-down drive-count-status-space drive-count-status-browsable"></i>{{userInfo.DriveCountBrowsable}}
-                                    <i class="fas fa-stop-circle drive-count-status-space drive-count-status-excluded"></i>{{userInfo.DriveCountExcluded}}
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-           
-            </table>
-        }
-    
+    </div>
+    <div class="row-start-2 row-end-5 col-start-10 col-end-13 bg-gray-100 ">
+        <app-user-filters (filtersApplied)="filtrosAplicados($event)" />
+    </div>
 
-    <!-- Paginación y filtros -->
 
 </div>

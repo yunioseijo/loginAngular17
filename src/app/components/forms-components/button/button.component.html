@@ -1,0 +1,9 @@
+<button (click)="nombreMetodoEvento($event)"
+[ngClass]="buttonClasses"
+    class="">
+    @if("icon" != null){
+        <i [class]="icon"></i>
+    }
+    
+    {{text}}
+</button>
