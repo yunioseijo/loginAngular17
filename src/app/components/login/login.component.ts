@@ -51,18 +51,18 @@ export default class LoginComponent implements OnInit {
     });
   }
 
-  generateFormLogin() {
-    this.loginForm = this.fb.group({
-      emailLoginForm: [
-        'partner@gigas.com',
-        [Validators.required, Validators.email],
-      ],
-      passwordLoginForm: [
-        '1234',
-        [Validators.required, Validators.minLength(4)],
-      ],
-    });
-  }
+  // generateFormLogin() {
+  //   this.loginForm = this.fb.group({
+  //     emailLoginForm: [
+  //       'partner@gigas.com',
+  //       [Validators.required, Validators.email],
+  //     ],
+  //     passwordLoginForm: [
+  //       '1234',
+  //       [Validators.required, Validators.minLength(4)],
+  //     ],
+  //   });
+  // }
 
   login() {
     const { emailLoginForm, passwordLoginForm } = this.loginForm.value;

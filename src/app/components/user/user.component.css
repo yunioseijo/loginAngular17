@@ -1,3 +1,6 @@
+#user-list {
+    grid-template-rows: 3rem 1fr 1fr 1fr;
+}
 .drive-count-status-uploading {
     color: #e2a600;
 }

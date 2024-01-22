@@ -41,7 +41,7 @@ export interface IUserListFilterRequest {
     ConnectionStatus: number,
     PartnerStatus: number
   }
-  export class UserListFilterRequest {
+  export class UserListFilterRequest2 {
     FreeText: string | undefined;
     HasDrivesUploading: true | undefined;
     HasDrivesProcessingUpload: true | undefined;
@@ -68,6 +68,135 @@ export interface IUserListFilterRequest {
         this.PartnerStatus = 0;
       }
   }
+
+  export class UserListFilterRequest {
+    private _freeText: string | undefined;
+    private _hasDrivesUploading: boolean | undefined;
+    private _hasDrivesProcessingUpload: boolean | undefined;
+    private _hasDrivesBrowsable: boolean | undefined;
+    private _partner: string | undefined;
+    private _showDeleted: boolean | undefined;
+    private _showFromLoozend: boolean | undefined;
+    private _showFromIntegrators: boolean | undefined;
+    private _showFromWhitebrand: boolean | undefined;
+    private _connectionStatus: number | undefined;
+    private _partnerStatus: number | undefined;
+
+    constructor(init?: Partial<UserListFilterRequest>) {
+        this._freeText = init?.freeText || "";
+        this._hasDrivesUploading = init?.hasDrivesUploading ?? true;
+        this._hasDrivesProcessingUpload = init?.hasDrivesProcessingUpload ?? true;
+        this._hasDrivesBrowsable = init?.hasDrivesBrowsable ?? true;
+        this._partner = init?.partner || "";
+        this._showDeleted = init?.showDeleted ?? true;
+        this._showFromLoozend = init?.showFromLoozend ?? true;
+        this._showFromIntegrators = init?.showFromIntegrators ?? true;
+        this._showFromWhitebrand = init?.showFromWhitebrand ?? true;
+        this._connectionStatus = init?.connectionStatus ?? 0;
+        this._partnerStatus = init?.partnerStatus ?? 0;
+    }
+    toObject(): any {
+        return {
+          freeText: this.freeText,
+          hasDrivesUploading: this.hasDrivesUploading,
+          hasDrivesProcessingUpload: this.hasDrivesProcessingUpload,
+          hasDrivesBrowsable: this.hasDrivesBrowsable,
+          partner: this.partner,
+          showDeleted: this.showDeleted,
+          showFromLoozend: this.showFromLoozend,
+          showFromIntegrators: this.showFromIntegrators,
+          showFromWhitebrand: this.showFromWhitebrand,
+          connectionStatus: this.connectionStatus,
+          partnerStatus: this.partnerStatus
+        };
+      }
+
+    // Getters y Setters
+    get freeText(): string | undefined {
+        return this._freeText;
+    }
+
+    set freeText(value: string | undefined) {
+        this._freeText = value;
+    }
+    get partner(): string | undefined {
+        return this._partner;
+    }
+
+    set partner(value: string | undefined) {
+        this._partner = value;
+    }
+
+    get hasDrivesUploading(): boolean | undefined {
+        return this._hasDrivesUploading;
+    }
+
+    set hasDrivesUploading(value: boolean | undefined) {
+        this._hasDrivesUploading = value;
+    }
+    get showFromLoozend(): boolean | undefined {
+        return this._showFromLoozend;
+    }
+
+    set showFromLoozend(value: boolean | undefined) {
+        this.showFromLoozend = value;
+    }
+    get showFromIntegrators(): boolean | undefined {
+        return this._showFromIntegrators;
+    }
+
+    set showFromIntegrators(value: boolean | undefined) {
+        this.showFromIntegrators = value;
+    }
+    get showFromWhitebrand(): boolean | undefined {
+        return this._showFromWhitebrand;
+    }
+
+    set showFromWhitebrand(value: boolean | undefined) {
+        this.showFromWhitebrand = value;
+    }
+    get showDeleted(): boolean | undefined {
+        return this._showDeleted;
+    }
+
+    set showDeleted(value: boolean | undefined) {
+        this._showDeleted = value;
+    }
+    get hasDrivesProcessingUpload(): boolean | undefined {
+        return this._hasDrivesProcessingUpload;
+    }
+
+    set hasDrivesProcessingUpload(value: boolean | undefined) {
+        this._hasDrivesProcessingUpload = value;
+    }
+    get hasDrivesBrowsable(): boolean | undefined {
+        return this._hasDrivesBrowsable;
+    }
+
+    set hasDrivesBrowsable(value: boolean | undefined) {
+        this._hasDrivesBrowsable = value;
+    }
+
+    
+
+    get connectionStatus(): number | undefined {
+        return this._connectionStatus;
+    }
+
+    set connectionStatus(value: number | undefined) {
+        this._connectionStatus = value;
+    }
+
+    get partnerStatus(): number | undefined {
+        return this._partnerStatus;
+    }
+
+    set partnerStatus(value: number | undefined) {
+        this._partnerStatus = value;
+    }
+}
+
+  
 
 export interface IUserListFilterRequest2 {
     Filter: IFilter;

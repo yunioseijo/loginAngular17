@@ -1,0 +1,66 @@
+<!-- user-filters.component.html -->
+<div >
+    <div class="font-medium text-center text-xl sm:text-2xl my-4 uppercase text-gray-800">
+        <h5>Filters</h5>
+    </div>
+
+    <form [formGroup]="filtersForm" (ngSubmit)="applyFilters()" class="text-center">
+        <div class="mb-4">             
+            <input type="freeText" name="freeText" formControlName="freeText" required id="freeText" 
+              class="text-sm sm:text-base placeholder-gray-500 text-center rounded-lg  py-2 
+              focus:outline-none focus:border-blue-400  w-3/5" placeholder="Free text" />            
+        </div>
+        <div class="mb-4">             
+            <input type="freeText" name="partnerName_id" formControlName="partner" required id="partnerName_id" 
+              class="text-sm sm:text-base  w-3/5 placeholder-gray-500 text-center rounded-lg  py-2 
+              focus:outline-none focus:border-blue-400" placeholder="Partener name or id" />            
+        </div>
+        <div class="">
+        
+            <div class="mb-4  w-3/5">
+                <input id="driveUploading" aria-describedby="driveUploading" type="checkbox" formControlName="hasDrivesUploading"
+                class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded" checked="">
+                <label for="driveUploading" class="text-sm ml-3 font-medium text-gray-900">Uploading </label>
+            </div>
+            <div class="mb-4  w-3/5">
+                <input id="driveProcessing" aria-describedby="driveProcessing" type="checkbox" formControlName="hasDrivesProcessingUpload"
+                class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded" checked="">
+                <label for="driveProcessing" class="text-sm ml-3 font-medium text-gray-900">Processing </label>
+            </div>
+            <div class="mb-4  w-3/5">
+                <input id="driveBrowsable" aria-describedby="driveBrowsable" type="checkbox" formControlName="hasDrivesBrowsable"
+                class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded" checked="">
+                <label for="driveBrowsable" class="text-sm ml-3 font-medium text-gray-900">Browsable </label>
+            </div>
+            <div class="mb-4  w-3/5">
+                <input id="showDeleted" aria-describedby="showDeleted" type="checkbox" formControlName="showDeleted"
+                class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded" checked="">
+                <label for="showDeleted" class="text-sm ml-3 font-medium text-gray-900">Show deleted </label>
+            </div>
+        </div>
+
+        
+            <div class="mb-4">
+                <select class="rounded w-3/5 py-2" aria-label="Default select example">
+                    @for (conection of connectionStatusOptions; track $index) {
+                        <option  class="py-2 " selected [value]="conection">{{conection}}</option>
+                    }                   
+                </select>
+            </div>
+            <div class="mb-4">
+                <select class="rounded w-3/5 py-2 " aria-label="Default select example">
+                    @for (item of partnerStatusOptions; track $index) {
+
+                        <option selected [value]="item">{{item}}</option>
+                    }                   
+                </select>
+            </div>
+           
+        
+        <button class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center
+         text-green-500 uppercase transition bg-transparent border-2 border-green-500 rounded ripple
+          hover:bg-green-100 focus:outline-none">
+        Apply
+      </button>
+    </form>
+</div>
