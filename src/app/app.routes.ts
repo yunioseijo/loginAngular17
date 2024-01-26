@@ -3,6 +3,8 @@ import { authGuard,authGuard2, authGuardMatch } from './guards/auth.guard';
 import { AuthGuard, } from './guards/authasync.guard';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HomeComponent } from './components/home/home.component';
+import { AngularDashboardComponent } from './angular-dashboard/angular-dashboard.component';
+import { AngularTableComponent } from './angular-table/angular-table.component';
 
 export const routes: Routes = [
     {
@@ -11,9 +13,16 @@ export const routes: Routes = [
        
     },
     {
-        path: 'profile',
+        path: 'dashboard',
         //lo puedo hacer de esta manera porque exporto la clase por defecto
-        loadComponent: () => import('./profile-editor/profile-editor.component'),
+        component: AngularDashboardComponent,
+        // canMatch: [authGuardMatch]
+        canActivate: [authGuard2]
+    },
+    {
+        path: 'computers',
+        //lo puedo hacer de esta manera porque exporto la clase por defecto
+        component: AngularTableComponent,
         // canMatch: [authGuardMatch]
         canActivate: [authGuard2]
     },

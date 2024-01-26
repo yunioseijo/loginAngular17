@@ -19,6 +19,11 @@ import { RouterOutlet } from '@angular/router';
 
 })
 export class HomeComponent {
+  navLinks = [
+    { text: 'Home', path: '/home' },
+    { text: 'About', path: '/about' },
+    // otros links...
+  ];
 
 
   constructor() {  }

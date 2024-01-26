@@ -1,8 +1,23 @@
 <!-- user-filters.component.html -->
-<div >
-    <div class="font-medium text-center text-xl sm:text-2xl my-4 uppercase text-gray-800">
-        <h5>Filters</h5>
+@if(isLargeScreen || showFilters){
+    <div [ngClass]="{
+        'filter-container': isLargeScreen, 
+        'filter-container-mobile': !isLargeScreen,
+        'md-whiteframe-3dp': !isLargeScreen
+      }">
+
+<div class="font-medium text-center text-xl sm:text-2xl my-4 uppercase text-gray-800">
+    <h5>Filters</h5>
+</div>
+
+
     </div>
+
+}
+
+  <!-- Contenido del filtro aquí -->
+
+    
 
     <form [formGroup]="filtersForm" (ngSubmit)="applyFilters()" class="text-center">
         <div class="mb-4">             
@@ -63,4 +78,4 @@
         Apply
       </button>
     </form>
-</div>
+

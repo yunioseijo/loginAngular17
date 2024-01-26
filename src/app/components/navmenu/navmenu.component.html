@@ -1,15 +1,27 @@
-<div class="w-full shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px]">
-    <div class="ml-4 h-14 max-w-6xl">
-      <ul class="relative mx-12 flex h-full flex-row items-center justify-between text-[16px] font-medium sm:text-[18px]">
-        <li class="hover:cursor-pointer">Logo</li>
-        @if(authService.isLoggedIn()){
-
-          <li class="hover:cursor-pointer">Home</li>
-        }
-        <li class="hover:cursor-pointer">Services</li>
-        <li class="hover:cursor-pointer">Contact</li>
-        <li class="hover:cursor-pointer"><app-avatar /></li>
-
-      </ul>
-    </div>
-</div>
+<!-- <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+    <mat-sidenav-container class="example-sidenav-container bg-yellow-200" 
+        [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+            <mat-sidenav #lateralBar [mode]=" 'over'"
+                [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" class="bg-red-300">
+                    <mat-nav-list>
+                        @for (nav of fillerNav; track nav) {
+                        <a mat-list-item routerLink=".">{{nav}}</a>
+                        }
+                    </mat-nav-list>
+            </mat-sidenav>
+    
+            <mat-sidenav-content class="bg-blue-300">
+                <mat-toolbar color="primary" class="example-toolbar">
+                    <button mat-icon-button (click)="lateralBar.toggle()">
+                      <mat-icon>menu</mat-icon>
+                    </button>
+                    <h1 class="example-app-name">Responsive App</h1>
+                  </mat-toolbar>
+               
+                @for (content of fillerContent; track content) {
+                    <p>{{content}}</p>
+                  }
+             
+            </mat-sidenav-content>
+    </mat-sidenav-container>
+</div> -->

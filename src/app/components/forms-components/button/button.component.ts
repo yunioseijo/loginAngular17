@@ -9,7 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './button.component.css',
 })
 export class ButtonComponent {
-  @Input() text: string = 'Click me'; // Texto del botón
+  @Input() text: string | undefined; // Texto del botón
   @Input() icon: string | undefined; // Para el ícono
   @Input() customClasses: string | undefined; // Para clases personalizadas
   @Output() nombreOuput1 = new EventEmitter<Event>();
