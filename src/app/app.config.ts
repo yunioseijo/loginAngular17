@@ -7,9 +7,9 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { authInterceptor } from './interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes, withViewTransitions({
-        skipInitialTransition: true,
-    })),
+  providers: [
+    provideRouter(routes, withViewTransitions({skipInitialTransition: true, })),
     provideHttpClient(withInterceptors([authInterceptor,])),
-    importProvidersFrom(HttpClientModule), provideAnimations(), provideAnimations()]
+    importProvidersFrom(HttpClientModule), provideAnimations()
+  ]
 };
