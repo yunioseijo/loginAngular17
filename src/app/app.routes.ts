@@ -8,7 +8,7 @@ export const routes: Routes = [
     {
         path: 'login',
         loadComponent: () => import('./components/login/login.component'),//lo puedo hacer de esta manera porque exporto la clase por defecto
-       
+
     },
     {
         path: 'profile',
@@ -32,7 +32,7 @@ export const routes: Routes = [
                  <path d="M16 21H14C14 18.2386 11.7614 16 9 16C6.23858 16 4 18.2386 4 21H2C2 17.134 5.13401 14 9 14C12.866 14 16 17.134 16 21Z"></path>
                  </svg>`},
                  loadComponent: () => import('./components/user/user.component')
- 
+
              },
              {
                  path: 'update',
@@ -40,8 +40,8 @@ export const routes: Routes = [
                  data: {icon: `<svg class="h-5 w-5 group-hover:fill-secondary-color dark:fill-gray-600  transition-colors duration-200" viewBox="-96 0 512 512" xmlns="http://www.w3.org/2000/svg">
                  <path d="M177 255.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 351.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 425.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1zm-34-192L7 199.7c-9.4 9.4-9.4 24.6 0 33.9l22.6 22.6c9.4 9.4 24.6 9.4 33.9 0l96.4-96.4 96.4 96.4c9.4 9.4 24.6 9.4 33.9 0l22.6-22.6c9.4-9.4 9.4-24.6 0-33.9l-136-136c-9.2-9.4-24.4-9.4-33.8 0z"/>
                  </svg>`},
-                 loadComponent: () => import('./components/update/update.component')
- 
+                 loadComponent: () => import('./components/update/update.component').then(c => c.UpdateComponent)
+
              },
              {
                  path: 'computers',
@@ -49,7 +49,7 @@ export const routes: Routes = [
                  data: {icon: `<svg class="h-5 w-5 group-hover:fill-secondary-color dark:fill-gray-600  transition-colors duration-200" viewBox="0 -64 640 640" xmlns="http://www.w3.org/2000/svg">
                  <path d="M624 416H381.54c-.74 19.81-14.71 32-32.74 32H288c-18.69 0-33.02-17.47-32.77-32H16c-8.8 0-16 7.2-16 16v16c0 35.2 28.8 64 64 64h512c35.2 0 64-28.8 64-64v-16c0-8.8-7.2-16-16-16zM576 48c0-26.4-21.6-48-48-48H112C85.6 0 64 21.6 64 48v336h512V48zm-64 272H128V64h384v256z"/></svg>`},
                  loadComponent: () => import('./components/computers/computers.component')
- 
+
              },
             {
                 path: 'settings',

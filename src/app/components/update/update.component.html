@@ -1,1 +1,9 @@
-<p>update works!</p>
+
+<mat-tab-group>
+  @for (computer of computers(); track computer) {
+    <mat-tab>
+      <ng-template mat-tab-label>{{computer.name}}</ng-template>
+      hola
+    </mat-tab>
+  }
+</mat-tab-group>
