@@ -25,7 +25,7 @@ export default class LoginComponent implements OnInit {
   // loginForm!: FormGroup;
 
   loginForm = new FormGroup({
-    emailLoginForm:     new FormControl<string>('partner@gigas.com', [Validators.email, Validators.required,]           ),
+    emailLoginForm:     new FormControl<string>('admin@gigas.com', [Validators.email, Validators.required,]           ),
     passwordLoginForm:  new FormControl<string>('1234',              [ Validators.minLength(3),  Validators.required,]  ),
   });
 
@@ -39,10 +39,10 @@ export default class LoginComponent implements OnInit {
     // this.generateFormLogin();
     this.brandingService.getBrandingInformation().subscribe({
       next: (data) => {
-        const {PrimaryColor, SecondaryColor} = data;
-        document.documentElement.style.setProperty('--primary-color',PrimaryColor);
-        document.documentElement.style.setProperty('--secondary-color',SecondaryColor);
-        console.log('PrimaryColor',PrimaryColor);
+        const {primaryColor, secondaryColor} = data;
+        document.documentElement.style.setProperty('--primary-color',primaryColor);
+        document.documentElement.style.setProperty('--secondary-color',secondaryColor);
+        console.log('PrimaryColor',primaryColor);
         console.log('BrandiingInformation', data);
       },
       error: (err) => {
@@ -72,8 +72,9 @@ export default class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         // this.router.navigate(['/profile']);
-        console.log('login ok')
-        this.router.navigate(['/home']);
+        console.log('login ok');
+        this.router.navigateByUrl('/home');
+        console.log('redirigo a home');
       },
       error: (err) => {
         this.errorMessage = err.error.message;

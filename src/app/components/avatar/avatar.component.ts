@@ -16,11 +16,11 @@ import { UserService } from '../../services/user.service';
 })
 export class AvatarComponent implements OnInit {
   ngOnInit(): void {
-    
+
   this.userService.getCurrentUser().subscribe({
     next: (user) => {
       console.log(user);
-      this.userName=user.Email;
+      this.userName=user.email;
     }
   })
   }
@@ -37,11 +37,11 @@ export class AvatarComponent implements OnInit {
   errorMessage = '';
   userName = '';
 
-  
+
   logout() {
-        this.storageService.clean();      
+        this.storageService.clean();
       this.isLoggedIn = false;
-      this.router.navigate(['/login']);    
+      this.router.navigate(['/login']);
 
 }
 

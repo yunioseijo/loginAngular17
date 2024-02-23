@@ -12,17 +12,19 @@ import {
 } from 'rxjs';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { IUserComputerResponse } from '../Models/usercomputers';
+import { GlobalService } from './global.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DriveService {
   http = inject(HttpClient);
+  globalService = inject(GlobalService);
 
   constructor() { }
 
   private computers$ = this.http.post<IUserComputerResponse[]>(
-    `http://devportalapi.g-backupinfinite.gigas.com/Portal/Drive/GetUserComputers`,{});
+    `${this.globalService.PORTAL_API_URL()}/Portal/Drive/GetUserComputers`,{});
 
   // Expose signals from this service
   computers = toSignal(this.computers$, {initialValue: [] as IUserComputerResponse[]});

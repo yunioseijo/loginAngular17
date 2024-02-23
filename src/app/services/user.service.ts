@@ -22,7 +22,7 @@ export class UserService {
     return this.http.post<IAuthenticatedUserResponse>(this.global.PORTAL_API_URL() + '/Auth/CurrentUser',{} );
   }
 
-  checkProfile(profile: number): Observable<any> {    
+  checkProfile(profile: number): Observable<any> {
     return this.http.post(this.global.PORTAL_API_URL() + '/Auth/CheckRole',{ params: { profiles: profile } });
   }
   hasProfile(profile: number, perfilObjetivo: number): boolean{
@@ -36,5 +36,5 @@ export class UserService {
     return this.http.post<IUserListResponse>('http://localhost:61180/User/GetUsers', params);
   }
 
- 
+
 }

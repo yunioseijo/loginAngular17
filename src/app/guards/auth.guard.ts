@@ -35,22 +35,22 @@ export const authGuard2: CanActivateFn = (route, state) => {
 //   let isLoggedIn = storageService.isLoggedIn();
 //   console.log('Guard, Esta logueado?', isLoggedIn);
 //   if (isLoggedIn) {
-    
+
 //     userService.getCurrentUser().subscribe((res: any) => {
 //       user = res;
 //       userService.checkProfile(user.Profiles).subscribe(  (response: HttpResponse<any>) => {
 //         // Obtener el código de estado
 //         if(!response)
 //           console.log('Código de estado errado');
-        
+
 //         console.log('Código de estado:',response);
 //         return false;
-//       },   
-    
+//       },
+
 //     error => {
 //       console.log('Código de estado errado');
 //     }
-      
+
 //       );
 //       console.log(user.Profiles);
 //       });
@@ -62,7 +62,7 @@ export const authGuard2: CanActivateFn = (route, state) => {
 //     // Si no está logueado, redirige a la página de login
 //     const url = router.createUrlTree(['/login']);
 //     return url;
-  
+
 // };
 
 export const authGuard: CanActivateFn = () => {
@@ -72,12 +72,13 @@ export const authGuard: CanActivateFn = () => {
   const router = inject(Router);
 
   if (!storageService.isLoggedIn()) {
+    console.log('no ha hecho login')
     const url = router.createUrlTree(['/login']);
     return url
   }
 
   return userService.getCurrentUser().pipe(
-    switchMap((user) => userService.checkProfile(user.Profile)),
+    switchMap((user) => userService.checkProfile(user.profile)),
     map((response) => {
       // Aquí puedes manejar la lógica en base al estado de la respuesta
       return true; // O false, dependiendo de tu lógica específica

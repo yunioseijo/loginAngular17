@@ -29,15 +29,15 @@ export class AppComponent {
   public router = inject(Router);
 
   ngOnInit(): void {
-    
+
     console.log('on it appComponent');
 
     this.brandingService.getBrandingInformation().subscribe({
       next: (data: IBrandingInformation) => {
-        const { PrimaryColor, SecondaryColor } = data;
-        document.documentElement.style.setProperty('--primary-color', PrimaryColor );
-        document.documentElement.style.setProperty('--secondary-color', SecondaryColor);
-        console.log('PrimaryColor', PrimaryColor);
+        const { primaryColor, secondaryColor } = data;
+        document.documentElement.style.setProperty('--primary-color', primaryColor );
+        document.documentElement.style.setProperty('--secondary-color', secondaryColor);
+        console.log('PrimaryColor', primaryColor);
         console.log('BrandiingInformation', data);
       },
       error: (err) => {
@@ -46,6 +46,6 @@ export class AppComponent {
     });
   }
 
-  
+
 
 }

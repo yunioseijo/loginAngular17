@@ -22,13 +22,13 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   // Verifica si la URL actual está en la lista de excluidos
   const isExcludedUrl = excludedUrls.some(url => req.url.startsWith(url));
   console.log('isExcludedUrl',isExcludedUrl);
-  
+
   if (storageservice.isLoggedIn() && !isExcludedUrl ) {
 
     clonedRequest = req.clone({
       setHeaders: {
-        authorization: localStorage.getItem("AccessToken")!,
-        refresh: localStorage.getItem("RefreshToken")!,
+        authorization: localStorage.getItem("accessToken")!,
+        refresh: localStorage.getItem("refreshToken")!,
     }
 
     });

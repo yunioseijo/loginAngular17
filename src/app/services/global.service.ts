@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalService {
 
-  private portal_api_url: string = 'http://infinitebackup.gigas.com';
-  private portal_api_port: string = '9080';
+  private portal_api_url: string = 'http://localhost';
+  private portal_api_port: string = '10006';
   private admin_api_url: string = 'https://yvl-webadmin.azurewebsites.net/api/';
   private admin_api_port: string = '443';
 
@@ -24,18 +24,18 @@ export class GlobalService {
     }
     return location.protocol + '//' + location.hostname + ":" + this.admin_api_port;
   }
-  
+
   public httpOptions(): any{
     return new HttpHeaders({ 'Content-Type': 'application/json' });
 
   }
-  
 
-  
+
+
 
   constructor() { }
-  
 
-  
-  
+
+
+
 }

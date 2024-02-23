@@ -17,7 +17,7 @@ const httpOptions = {
 export class AuthService {
   public global = inject(GlobalService);
   private _http = inject(HttpClient);
- 
+
   constructor() {}
 
 /**
@@ -32,11 +32,11 @@ export class AuthService {
  */
   login(username: string, password: string, partenrId:number): Observable<any> {
     return this._http.post(
-      `${this.global.PORTAL_API_URL()}/Auth/Login`,
-      {        
-          Email: username, 
-          Password: password, 
-          PartnerId: partenrId 
+      `${this.global.PORTAL_API_URL()}/Auth/SignIn`,
+      {
+          Email: username,
+          Password: password,
+          PartnerId: partenrId
       },
       this.global.httpOptions()
     );
@@ -50,12 +50,12 @@ export class AuthService {
 
 
   public isLoggedIn(): boolean {
-    let accesToken = localStorage.getItem("AccessToken");
+    let accesToken = localStorage.getItem("accessToken");
     // const user = window.sessionStorage.getItem(USER_KEY);
     if (accesToken) {
       return true;
     }
     return false;
   }
- 
+
 }
