@@ -1,9 +1,13 @@
-
 <mat-tab-group>
   @for (computer of computers(); track computer) {
-    <mat-tab>
-      <ng-template mat-tab-label>{{computer.name}}</ng-template>
-      hola
-    </mat-tab>
-  }
+  <mat-tab label="{{computer.name}}">
+    <ng-template matTabContent>
+      <h3>Computer ID: {{computer.computerId }}</h3>
+      <h3>Computer Name: {{computer.machineName }}</h3>
+      <h3>Computer Alia: {{computer.alias }}</h3>
+      <h3>Loaded: {{getTimeLoaded(computer.computerId) | date:'medium'}}</h3>
+
+    </ng-template>
+  </mat-tab>
+}
 </mat-tab-group>

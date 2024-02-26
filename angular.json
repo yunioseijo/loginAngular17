@@ -25,7 +25,7 @@
               "src/assets"
             ],
             "styles": [
-              
+
               "src/styles.css"
             ],
             "scripts": []
@@ -62,7 +62,7 @@
             },
             "development": {
               "buildTarget": "loginAngular17:build:development",
-              "proxyConfig": "src/proxy.config.json"
+
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "buildTarget": "loginAngular17:build"
-            
+
           }
         },
         "test": {
@@ -87,7 +87,7 @@
               "src/assets"
             ],
             "styles": [
-              
+
               "src/styles.css"
             ],
             "scripts": []

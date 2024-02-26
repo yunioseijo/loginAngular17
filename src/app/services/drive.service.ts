@@ -13,6 +13,8 @@ import {
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { IUserComputerResponse } from '../Models/usercomputers';
 import { GlobalService } from './global.service';
+import { IBoundaryDatesResponse } from '../Models/boundary-dates';
+import { ISnapshotResponse } from '../Models/snapshots';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,7 @@ import { GlobalService } from './global.service';
 export class DriveService {
   http = inject(HttpClient);
   globalService = inject(GlobalService);
+
 
   constructor() { }
 
@@ -34,4 +37,26 @@ export class DriveService {
     const foundComputer = this.computers().find((comp) => comp.computerId === computerId);
     this.selectedComputer.set(foundComputer);
   }
+  getBoundaryDates(computerId: number) {
+    return this.http.post<IBoundaryDatesResponse[]>
+    (this.globalService.PORTAL_API_URL() + '/Portal/Drive/BoundaryDates', { computerId:  computerId.toString()});
+  }
+  getSnapshots(computerId: number, date: Date){
+    return this.http.post<ISnapshotResponse>
+    (this.globalService.PORTAL_API_URL() + '/Portal/Drive/GetSnapshot', { computerId:  computerId.toString(), date: date.toISOString()});
+  }
+
+  navigateByPath(driveId: number, requestDate: Date, fullPath: string, ) {
+    const bodyRequest= {
+      driveId: driveId,
+      fullPath: fullPath,
+      // requestDate: "2024-02-23T12:51:59.999Z",
+      requestedDate: requestDate.toISOString(),
+
+    }
+    return this.http.post(this.globalService.PORTAL_API_URL() + '/Portal/Drive/NavigateByPath', bodyRequest);
+
+  }
+
+
 }
