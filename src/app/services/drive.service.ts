@@ -15,6 +15,7 @@ import { IUserComputerResponse } from '../Models/usercomputers';
 import { GlobalService } from './global.service';
 import { IBoundaryDatesResponse } from '../Models/boundary-dates';
 import { ISnapshotResponse } from '../Models/snapshots';
+import { INavigateByPathResponse } from '../Models/navegate-by-path';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +47,7 @@ export class DriveService {
     (this.globalService.PORTAL_API_URL() + '/Portal/Drive/GetSnapshot', { computerId:  computerId.toString(), date: date.toISOString()});
   }
 
-  navigateByPath(driveId: number, requestDate: Date, fullPath: string, ) {
+  navigateByPath(driveId: number, requestDate: Date, fullPath: string, ) : Observable<INavigateByPathResponse> {
     const bodyRequest= {
       driveId: driveId,
       fullPath: fullPath,
@@ -54,7 +55,7 @@ export class DriveService {
       requestedDate: requestDate.toISOString(),
 
     }
-    return this.http.post(this.globalService.PORTAL_API_URL() + '/Portal/Drive/NavigateByPath', bodyRequest);
+    return this.http.post<INavigateByPathResponse>(this.globalService.PORTAL_API_URL() + '/Portal/Drive/NavigateByPath', bodyRequest);
 
   }
 
