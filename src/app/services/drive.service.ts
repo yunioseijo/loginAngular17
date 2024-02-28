@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import {
   catchError,
+  concatMap,
   filter,
   forkJoin,
   map,
@@ -57,6 +58,17 @@ export class DriveService {
     }
     return this.http.post<INavigateByPathResponse>(this.globalService.PORTAL_API_URL() + '/Portal/Drive/NavigateByPath', bodyRequest);
 
+  }
+  getFinalData(computerId: number): Observable<any> {
+    return this.getBoundaryDates(computerId).pipe(
+      concatMap(boundaryData =>
+        this.getSnapshots(computerId, new Date("2024-02-23T12:51:59.999Z")).pipe(
+          concatMap(snapshotData =>
+            this.navigateByPath(snapshotData.processedDrivePartitions[0].driveId, new Date("2024-02-23T12:51:59.999Z"), snapshotData.processedDrivePartitions[0].letter)
+          )
+        )
+      )
+    );
   }
 
 
