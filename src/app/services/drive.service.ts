@@ -33,43 +33,28 @@ export class DriveService {
 
   // Expose signals from this service
   computers = toSignal(this.computers$, {initialValue: [] as IUserComputerResponse[]});
-  selectedComputer = signal<IUserComputerResponse | undefined>(undefined);
 
-  computerSelected(computerId: number) {
-    const foundComputer = this.computers().find((comp) => comp.computerId === computerId);
-    this.selectedComputer.set(foundComputer);
-  }
-  getBoundaryDates(computerId: number) {
+  getBoundaryDates(computerId: number): Observable<IBoundaryDatesResponse[]> {
     return this.http.post<IBoundaryDatesResponse[]>
     (this.globalService.PORTAL_API_URL() + '/Portal/Drive/BoundaryDates', { computerId:  computerId.toString()});
   }
-  getSnapshots(computerId: number, date: Date){
+  getSnapshots(computerId: number, date: string): Observable<ISnapshotResponse> {
     return this.http.post<ISnapshotResponse>
-    (this.globalService.PORTAL_API_URL() + '/Portal/Drive/GetSnapshot', { computerId:  computerId.toString(), date: date.toISOString()});
+    (this.globalService.PORTAL_API_URL() + '/Portal/Drive/GetSnapshot', { computerId:  computerId.toString(), date: date});
   }
 
-  navigateByPath(driveId: number, requestDate: Date, fullPath: string, ) : Observable<INavigateByPathResponse> {
+  navigateByPath(driveId: number, requestDate: string, fullPath: string, ) : Observable<INavigateByPathResponse> {
     const bodyRequest= {
       driveId: driveId,
       fullPath: fullPath,
       // requestDate: "2024-02-23T12:51:59.999Z",
-      requestedDate: requestDate.toISOString(),
+      requestedDate: requestDate,
 
     }
     return this.http.post<INavigateByPathResponse>(this.globalService.PORTAL_API_URL() + '/Portal/Drive/NavigateByPath', bodyRequest);
 
   }
-  getFinalData(computerId: number): Observable<any> {
-    return this.getBoundaryDates(computerId).pipe(
-      concatMap(boundaryData =>
-        this.getSnapshots(computerId, new Date("2024-02-23T12:51:59.999Z")).pipe(
-          concatMap(snapshotData =>
-            this.navigateByPath(snapshotData.processedDrivePartitions[0].driveId, new Date("2024-02-23T12:51:59.999Z"), snapshotData.processedDrivePartitions[0].letter)
-          )
-        )
-      )
-    );
-  }
+
 
 
 }

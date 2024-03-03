@@ -6,10 +6,10 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalService {
 
-  // private portal_api_url: string = 'http://localhost';
-  // private portal_api_port: string = '10006';
-  private portal_api_url: string = 'https://devportalapi.g-backupinfinite.gigas.com';
-  private portal_api_port: string = '443';
+  private portal_api_url: string = 'http://localhost';
+  private portal_api_port: string = '10006';
+  // private portal_api_url: string = 'https://devportalapi.g-backupinfinite.gigas.com';
+  // private portal_api_port: string = '443';
   private admin_api_url: string = 'https://yvl-webadmin.azurewebsites.net/api/';
   private admin_api_port: string = '443';
 
