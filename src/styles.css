@@ -8,6 +8,8 @@
 
 :root {
     color-scheme: light dark;
+    --primary-color:#94CE0D;
+    --secondary-color:#333333;;
   }
   body {
     color: light-dark(#333b3c, #efefec);

@@ -28,22 +28,9 @@ export class AppComponent {
   public storageService = inject(StorageService);
   public router = inject(Router);
 
+
   ngOnInit(): void {
-
     console.log('on it appComponent');
-
-    this.brandingService.getBrandingInformation().subscribe({
-      next: (data: IBrandingInformation) => {
-        const { primaryColor, secondaryColor } = data;
-        document.documentElement.style.setProperty('--primary-color', primaryColor );
-        document.documentElement.style.setProperty('--secondary-color', secondaryColor);
-        console.log('PrimaryColor', primaryColor);
-        console.log('BrandiingInformation', data);
-      },
-      error: (err) => {
-        console.log('Error brandingINformation');
-      },
-    });
   }
 
 

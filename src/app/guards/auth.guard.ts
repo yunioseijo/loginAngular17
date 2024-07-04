@@ -6,7 +6,8 @@ import {
   Router,
   UrlSegment,
 } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+// import { AuthService } from '../services/auth.service';
+import { AuthService } from '../ClientApi/api/auth.service';
 import { StorageService } from '../services/storage.service';
 import { UserService } from '../services/user.service';
 import { Observable, catchError, map, mergeMap, of, switchMap } from 'rxjs';
@@ -18,12 +19,13 @@ export const authGuard2: CanActivateFn = (route, state) => {
   const authservice = inject(AuthService);
   const storageService = inject(StorageService);
   const router = inject(Router);
-  if (authservice.isLoggedIn()) {
-    return true;
-  } else {
-    const url = router.createUrlTree(['/login']);
-    return url;
-  }
+  return true;
+  // if (authservice.isLoggedIn()) {
+  //   return true;
+  // } else {
+  //   const url = router.createUrlTree(['/login']);
+  //   return url;
+  // }
 };
 // export const authGuard: CanActivateFn = () => {
 //   const storageService = inject(StorageService);
@@ -76,9 +78,7 @@ export const authGuard: CanActivateFn = () => {
     const url = router.createUrlTree(['/login']);
     return url
   }
-
-  return userService.getCurrentUser().pipe(
-    switchMap((user) => userService.checkProfile(user.profile)),
+  return authService.authCheckRolePost(({ Profiles: []})).pipe(
     map((response) => {
       // Aquí puedes manejar la lógica en base al estado de la respuesta
       return true; // O false, dependiendo de tu lógica específica
@@ -89,6 +89,18 @@ export const authGuard: CanActivateFn = () => {
       return of(false);
     })
   );
+  // return userService.getCurrentUser().pipe(
+  //   switchMap((user) => userService.checkProfile(user.profile)),
+  //   map((response) => {
+  //     // Aquí puedes manejar la lógica en base al estado de la respuesta
+  //     return true; // O false, dependiendo de tu lógica específica
+  //   }),
+  //   catchError((error) => {
+  //     console.log('Error:', error);
+  //     router.navigate(['/login']);
+  //     return of(false);
+  //   })
+  // );
 };
 
 export const authGuardMatch: CanMatchFn = (
@@ -97,5 +109,6 @@ export const authGuardMatch: CanMatchFn = (
 ) => {
   //injectando el servicio dentro de la función
   const authservice = inject(AuthService);
-  return authservice.isLoggedIn();
+  // return authservice.isLoggedIn();
+  return true;
 };
