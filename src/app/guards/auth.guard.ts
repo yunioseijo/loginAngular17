@@ -1,3 +1,4 @@
+import { CheckRoleRequest } from './../PruebasApi/model/checkRoleRequest';
 import { inject } from '@angular/core';
 import {
   CanActivateFn,
@@ -7,7 +8,7 @@ import {
   UrlSegment,
 } from '@angular/router';
 // import { AuthService } from '../services/auth.service';
-import { AuthService } from '../ClientApi/api/auth.service';
+import { AuthService } from '../PruebasApi/api/auth.service';
 import { StorageService } from '../services/storage.service';
 import { UserService } from '../services/user.service';
 import { Observable, catchError, map, mergeMap, of, switchMap } from 'rxjs';
@@ -78,9 +79,8 @@ export const authGuard: CanActivateFn = () => {
     const url = router.createUrlTree(['/login']);
     return url
   }
-  return authService.authCheckRolePost(({ Profiles: []})).pipe(
+  return authService.authCheckRolePost({profiles: []}).pipe(
     map((response) => {
-      // Aquí puedes manejar la lógica en base al estado de la respuesta
       return true; // O false, dependiendo de tu lógica específica
     }),
     catchError((error) => {

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { GlobalService } from './global.service';
 import { StorageService } from './storage.service';
 import { IAuthenticatedUserResponse, IUserResponse } from '../Models/user.model';
-import { IUserListFilterRequest, IUserListResponse, UserListFilterRequest } from '../Models/userList.model';
+import { IUserListFilterRequest,IUserListFilterRequest2, IUserListResponse, UserListFilterRequest } from '../Models/userList.model';
 
 const API_URL = 'http://localhost:8080/api/test/';
 
@@ -30,10 +30,10 @@ export class UserService {
   }
 
   getUserList2(params: IUserListFilterRequest): Observable<IUserListResponse> {
-    return this.http.post<IUserListResponse>(this.global.ADMIN_API_URL() + 'user/list', params);
+    return this.http.post<IUserListResponse>(this.global.PORTAL_API_URL() + '/User/GetUsers', params);
   }
-  getUserList(params: UserListFilterRequest): Observable<IUserListResponse> {
-    return this.http.post<IUserListResponse>('http://localhost:61180/User/GetUsers', params);
+  getUserList(params: IUserListFilterRequest2): Observable<IUserListResponse> {
+    return this.http.post<IUserListResponse>(this.global.ADMIN_API_URL() + '/User/GetUsers', params);
   }
 
 

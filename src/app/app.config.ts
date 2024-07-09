@@ -5,7 +5,7 @@ import { routes } from './app.routes';
 import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { authInterceptor } from './interceptors/auth.interceptor';
-import { ApiModule} from './ClientApi/index'
+import { ApiModule} from './PruebasApi/index'
 
 export const appConfig: ApplicationConfig = {
   providers: [

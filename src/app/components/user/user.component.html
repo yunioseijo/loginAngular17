@@ -5,12 +5,12 @@
 
     <div class="col-span-1 md:col-span-9 bg-white">
         <div class="flex justify-end my-4 mr-2">
-            <!-- 
+            <!--
                 Asi puedo usar el componente button que creé.
-                <ysm-forms-button title="New" icon="fas fa-file-download" customClasses="rounded" (nombreOuput1)="onButtonClickDelOutput($event)"></ysm-forms-button> 
+                <ysm-forms-button title="New" icon="fas fa-file-download" customClasses="rounded" (nombreOuput1)="onButtonClickDelOutput($event)"></ysm-forms-button>
             -->
             <button class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center
-                 uppercase transition  rounded  ripple 
+                 uppercase transition  rounded  ripple
                  hover:shadow hover:bg-gray-200 hover:text-black focus:outline-none">
                 <i class="fas fa-file-download"></i> CSV</button>
             <a class="button px-6 py-2 text-xs font-medium leading-6 text-center
@@ -31,21 +31,21 @@
             <tbody class="bg-white ">
             @for(userInfo of userInfoResponse; track $index){
             <tr  class="flex flex-col flex-no wrap sm:table-row">
-                <td class="px-3 py-4 text-wrap text-left ">{{ userInfo.Email }}</td>
-                <td class="px-3 py-4 text-wrap text-left">{{ userInfo.CreatedDate | date:'medium' }}</td>
-                <td class="px-3 py-4 text-wrap text-left ">{{ userInfo.UserId }}</td>
-                <td class="px-3 py-4 text-wrap text-left ">{{ userInfo.PartnerName }}</td>
-                <td class="px-3 py-4 text-wrap ">{{ userInfo.Culture}}</td>
-                <td class="px-3 py-4 text-wrap ">{{ userInfo.SourceIp}}</td>
+                <td class="px-3 py-4 text-wrap text-left ">{{ userInfo.email }}</td>
+                <td class="px-3 py-4 text-wrap text-left">{{ userInfo.createdDate | date:'medium' }}</td>
+                <td class="px-3 py-4 text-wrap text-left ">{{ userInfo.userId }}</td>
+                <td class="px-3 py-4 text-wrap text-left ">{{ userInfo.partnerName }}</td>
+                <td class="px-3 py-4 text-wrap ">{{ userInfo.culture}}</td>
+                <td class="px-3 py-4 text-wrap ">{{ userInfo.sourceIp}}</td>
                 <td class="">
                     <i class="fas fa-chevron-circle-up drive-count-status drive-count-status-uploading"></i>
-                    {{userInfo.DriveCountUploading}}
+                    {{userInfo.driveUploadingCount}}
                     <i class="fas fa-minus-circle drive-count-status-space drive-count-status-processing"></i>
-                    {{userInfo.DriveCountProcessingUpload}}
+                    {{userInfo.processedComputersCount}}
                     <i class="fas fa-chevron-circle-down drive-count-status-space drive-count-status-browsable"></i>
-                    {{userInfo.DriveCountBrowsable}}
+                    {{userInfo.driveProcessedCount}}
                     <i class="fas fa-stop-circle drive-count-status-space drive-count-status-excluded"></i>
-                    {{userInfo.DriveCountExcluded}}
+                    {{userInfo.hasProcessedComputers}}
                 </td>
             </tr>
             }

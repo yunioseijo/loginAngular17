@@ -1,15 +1,11 @@
-export * from './account.service';
-import { AccountService } from './account.service';
 export * from './auth.service';
 import { AuthService } from './auth.service';
 export * from './computer.service';
 import { ComputerService } from './computer.service';
 export * from './drive.service';
 import { DriveService } from './drive.service';
-export * from './integrationEvent.service';
-import { IntegrationEventService } from './integrationEvent.service';
 export * from './resqtimeAdminApi.service';
 import { ResqtimeAdminApiService } from './resqtimeAdminApi.service';
 export * from './user.service';
 import { UserService } from './user.service';
-export const APIS = [AccountService, AuthService, ComputerService, DriveService, IntegrationEventService, ResqtimeAdminApiService, UserService];
+export const APIS = [AuthService, ComputerService, DriveService, ResqtimeAdminApiService, UserService];

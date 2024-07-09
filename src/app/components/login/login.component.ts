@@ -1,9 +1,10 @@
+import { ApiModule } from './../../PruebasApi/api.module';
 import { Component, OnInit, Inject, inject } from '@angular/core';
 
 import { StorageService } from '../../services/storage.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../PruebasApi/api/auth.service';
 import { Router } from '@angular/router';
 import { BrandingService } from '../../services/branding.service';
 import { NavmenuComponent } from '../navmenu/navmenu.component';
@@ -79,7 +80,7 @@ export default class LoginComponent implements OnInit {
     //     console.log('redirigo a home');
     //   },
 
-    this.authService.login(emailLoginForm!, passwordLoginForm!, 1).subscribe({
+    this.authService.authSignInPost({email: emailLoginForm!, password: passwordLoginForm!, partnerId: 1}).subscribe({
       next: (data) => {
         this.storageService.saveUser(data);
         this.isLoginFailed = false;
