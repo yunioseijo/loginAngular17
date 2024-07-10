@@ -1,16 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterOutlet } from '@angular/router';
-import { AuthService } from './services/auth.service';
-import { BrandingService } from './services/branding.service';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+
 import { StorageService } from './services/storage.service';
-import { UserService } from './services/user.service';
-import { IBrandingInformation } from './Models/branding.model';
+import { UserListComponent } from './dashboard/pages/user-list/user-list.component';
+import { UserDetailsComponent } from './dashboard/pages/user-details/user-details.component';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, UserListComponent, UserDetailsComponent, RouterLink, RouterLinkActive ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
@@ -22,9 +22,7 @@ export class AppComponent {
   title = 'loginAngular17';
   errorMessage = '';
 
-  public authService = inject(AuthService);
-  public userService = inject(UserService);
-  public brandingService = inject(BrandingService);
+
   public storageService = inject(StorageService);
   public router = inject(Router);
 

@@ -1,8 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 export enum ConnectionStatus {
@@ -21,7 +18,7 @@ export enum PartnerStatus {
 @Component({
   selector: 'app-user-filters',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule,ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './user-filters.component.html',
   styleUrl: './user-filters.component.css'
 })
@@ -51,7 +48,7 @@ export class UserFiltersComponent implements OnInit {
   connectionStatusOptions = Object.values(ConnectionStatus);
   partnerStatusOptions = Object.values(PartnerStatus) ;
 
- 
+
 
   constructor(private fb: FormBuilder) {}
 

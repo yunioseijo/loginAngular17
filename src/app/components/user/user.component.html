@@ -29,7 +29,7 @@
                 <th class="px-3 py-4 whitespace-nowrap text-left header-cell ">Drives</th>
             </tr>
             <tbody class="bg-white ">
-            @for(userInfo of userInfoResponse; track $index){
+            <!-- @for(userInfo of userInfoResponse; track $index){
             <tr  class="flex flex-col flex-no wrap sm:table-row">
                 <td class="px-3 py-4 text-wrap text-left ">{{ userInfo.email }}</td>
                 <td class="px-3 py-4 text-wrap text-left">{{ userInfo.createdDate | date:'medium' }}</td>
@@ -48,14 +48,14 @@
                     {{userInfo.hasProcessedComputers}}
                 </td>
             </tr>
-            }
+            } -->
             </tbody>
         </table>
     </div>
 
     </div>
     <div class="row-start-2 row-end-5 col-start-10 col-end-13 bg-gray-100 ">
-        <app-user-filters (filtersApplied)="filtrosAplicados($event)" />
+        <!-- <app-user-filters (filtersApplied)="filtrosAplicados($event)" /> -->
     </div>
 
 

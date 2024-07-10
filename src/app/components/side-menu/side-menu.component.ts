@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { routes } from '../../app.routes';
 import { SafeHtmlPipe } from '../../Pipes/safehtml.pipe';
 import { DomSanitizer } from '@angular/platform-browser';
-import { IUserListFilterRequest, UserListFilterRequest } from '../../Models/userList.model';
 
 
 
@@ -19,9 +18,9 @@ import { IUserListFilterRequest, UserListFilterRequest } from '../../Models/user
 export class SideMenuComponent {
   sanitizer= inject(DomSanitizer)
   public menuItems = routes
-      .map((route) => route.children ?? [])    
-      .flat()    
-      .filter((route) => route && route.path)    
+      .map((route) => route.children ?? [])
+      .flat()
+      .filter((route) => route && route.path)
       .filter((route) => !route.path?.includes(':'))
       .map((route) => ({
           path: route.path,
@@ -33,5 +32,5 @@ export class SideMenuComponent {
         console.log(html);
         return this.sanitizer.bypassSecurityTrustHtml(html);
     }
- 
+
   }

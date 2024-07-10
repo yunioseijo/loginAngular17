@@ -1,7 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { UserService } from '../../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IUserInfoResponse, IUserListResponse, UserListFilterRequest, IUserListFilterRequest2 } from '../../Models/userList.model';
 import { switchMap } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,53 +16,50 @@ import { ButtonComponent } from '../forms-components/button/button.component';
   styleUrl: './user.component.css'
 })
 export default class UserComponent {
-filtrosAplicados($event: any) {
-console.log("Este valor del filtro es en el padre:", $event);
-this.queryParams = $event;
-console.log(this.queryParams);
-this.getUsers(this.queryParams);
-}
-  userInfoResponse: IUserInfoResponse[]=[];
-  userListResponse: IUserListResponse | undefined;
+// filtrosAplicados($event: any) {
+// console.log("Este valor del filtro es en el padre:", $event);
+// this.queryParams = $event;
+// console.log(this.queryParams);
+// this.getUsers(this.queryParams);
+// }
+
   userFilter:any={name:''};
 
-  private _userService = inject(UserService);
   private _router = inject(ActivatedRoute);
-  // queryParams: UserListFilterRequest = new UserListFilterRequest();
-  queryParams: IUserListFilterRequest2 = {
-    "Filter": {
-      ConnectionStatus: '',
-      PartnerStatus: '',
-    },
-    "Order": {
-        "IsAscending": false,
-        "FieldName": "CreatedDate"
-    },
-    "Paging": {
-        "Page": 1,
-        "PageSize": 50
-    }
-}
+  // queryParams: IUserListFilterRequest2 = {
+  //   "Filter": {
+  //     ConnectionStatus: '',
+  //     PartnerStatus: '',
+  //   },
+  //   "Order": {
+  //       "IsAscending": false,
+  //       "FieldName": "CreatedDate"
+  //   },
+  //   "Paging": {
+  //       "Page": 1,
+  //       "PageSize": 50
+  //   }
+  // }
 
   ngOnInit(): void {
-      this.getUsers(this.queryParams);
+      // this.getUsers(this.queryParams);
 
 
   }
 
-  private getUsers(params: IUserListFilterRequest2): void {
-    this._userService.getUserList(params).subscribe({
-      next: (res) => this.onGetUsersSuccess(res),
-      error: (err) => this.onGetUsersError(err)
-    });
-  }
+  // private getUsers(params: IUserListFilterRequest2): void {
+  //   this._userService.getUserList(params).subscribe({
+  //     next: (res) => this.onGetUsersSuccess(res),
+  //     error: (err) => this.onGetUsersError(err)
+  //   });
+  // }
 
-  private onGetUsersSuccess(res: any): void {
-    console.log('Respuesta de getUsers:', res);
-    this.userListResponse = res;
-    console.log(res.itemss);
-    this.userInfoResponse = res.items; // Ajusta esto según la estructura de tu respuesta
-  }
+  // private onGetUsersSuccess(res: any): void {
+  //   console.log('Respuesta de getUsers:', res);
+  //   this.userListResponse = res;
+  //   console.log(res.itemss);
+  //   this.userInfoResponse = res.items; // Ajusta esto según la estructura de tu respuesta
+  // }
 
   private onGetUsersError(err: any): void {
     console.error(err);

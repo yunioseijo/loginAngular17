@@ -1,16 +1,16 @@
 <div class="flex gap-3 items-center">
 
 
-<div #showOptionAvatar [matMenuTriggerFor]="beforeMenu"
+<div #showOptionAvatar
     class="h-10 w-10 hover:user cursor-pointer relative ring-blue-700/30 rounded-full bg-cover bg-center bg-[url('https://ssl.gstatic.com/accounts/ui/avatar_2x.png')]">
- 
-    <mat-menu #beforeMenu="matMenu" xPosition="before">
 
-     
+    <!-- <mat-menu #beforeMenu="matMenu" xPosition="before">
+
+
         <ul>
           @if(userName){
             <li class="px-3 py-3 text-sm font-medium flex items-center space-x-2 hover:user cursor-pointer  hover:bg-slate-400">
-             
+
               <span> {{userName}} </span>
             </li>
           }
@@ -27,7 +27,7 @@
             </span>
             <span> Setting </span>
           </li>
-        
+
           <li (click)="logout()" class="px-3  py-3 text-sm font-medium flex items-center space-x-2  hover:user cursor-pointer hover:bg-slate-400">
             <span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -40,8 +40,8 @@
           </li>
 
         </ul>
-      
-</mat-menu>
+
+</mat-menu> -->
 
 
 

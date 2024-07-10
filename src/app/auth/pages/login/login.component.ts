@@ -1,19 +1,22 @@
-import { ApiModule } from './../../PruebasApi/api.module';
+// import { ApiModule } from './../../PruebasApi/api.module';
 import { Component, OnInit, Inject, inject } from '@angular/core';
 
-import { StorageService } from '../../services/storage.service';
+// import { StorageService } from './services/storage.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { AuthService } from '../../PruebasApi/api/auth.service';
+// import { AuthService } from '../../PruebasApi/api/auth.service';
 import { Router } from '@angular/router';
-import { NavmenuComponent } from '../navmenu/navmenu.component';
-import { GlobalService } from '../../services/global.service';
+import { StorageService } from '../../../services/storage.service';
+import { AuthResponse, AuthService } from '../../../PruebasApi';
+import { GlobalService } from '../../../services/global.service';
+// import { NavmenuComponent } from '../navmenu/navmenu.component';
+// import { GlobalService } from '../../services/global.service';
 // import { AuthService } from '../../ClientApi/api/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NavmenuComponent],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
@@ -54,8 +57,9 @@ export default class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         // this.router.navigate(['/profile']);
         console.log('login ok');
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/dashboard');
         console.log('redirigo a home');
+
       },
       error: (err) => {
         this.errorMessage = err.error.message;
