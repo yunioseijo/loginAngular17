@@ -45,6 +45,9 @@ export default class LoginComponent implements OnInit {
   }
 
   login() {
+    if (this.loginForm.invalid) {
+      return;
+    }
     const { emailLoginForm, passwordLoginForm } = this.loginForm.value;
 
     this.authService.authSignInPost({email: emailLoginForm!, password: passwordLoginForm!, partnerId: this.partner}).subscribe({

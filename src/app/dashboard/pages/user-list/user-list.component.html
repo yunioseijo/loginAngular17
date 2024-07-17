@@ -1,1 +1,71 @@
-<p>user-list works!</p>
+<h1 class="text-center text-2xl font-extrabold text-gray-900 sm:text-3xl md:text-5xl mb-2">Users List</h1>
+<p-table
+  [value]="users"
+  [rows]="10"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [paginator]="true"
+  selectionMode="single"
+  [(selection)]="selectedUser"
+  dataKey="email"
+  (onRowSelect)="onRowSelect($event)"
+  (onRowUnselect)="onRowUnselect($event)"
+  [tableStyle]="{'min-width': '60rem'}"
+  styleClass="p-datatable-striped">
+
+
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="email">Email <p-sortIcon field="Email" /></th>
+      <th pSortableColumn="createdDate">createdDate <p-sortIcon field="createdDate" /></th>
+      <th pSortableColumn="culture">culture <p-sortIcon field="culture" /></th>
+      <th pSortableColumn="computersCount">Computers Count <p-sortIcon field="computersCount" /></th>
+      <th >Drives </th>
+      <th pSortableColumn="sourceIp">sourceIp <p-sortIcon field="sourceIp" /></th>
+    </tr>
+    <tr>
+      <th> <p-columnFilter type="text" field="email" [showClearButton]="false" />  </th>
+      <th> <p-columnFilter type="date" field="createdDate" [showClearButton]="true" />  </th>
+      <th> <p-columnFilter type="text" field="culture" [showClearButton]="false" />  </th>
+      <th> <p-columnFilter type="text" field="computersCount" [showClearButton]="false" />  </th>
+      <th></th>
+      <th></th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-user>
+    <tr [pSelectableRow]="user">
+      <td>{{ user.email }}</td>
+      <td>{{ user.createdDate | date:'mediumDate' }}</td>
+      <td>{{ user.culture }}</td>
+      <td>{{ user.computersCount }}</td>
+      <td><div>
+        <i class="fas fa-chevron-circle-up drive-count-status drive-count-status-uploading"></i>{{user.driveUploadingCount}}
+        <i class="fas fa-minus-circle drive-count-status-space drive-count-status-processing"></i>{{user.driveCountProcessingUpload}}
+        <i class="fas fa-chevron-circle-down drive-count-status-space drive-count-status-browsable"></i>{{user.driveProcessedCount}}
+        <i class="fas fa-stop-circle drive-count-status-space drive-count-status-excluded"></i>{{user.driveCountExcluded}}
+      </div></td>
+      <td>{{ user.sourceIp }}</td>
+    </tr>
+  </ng-template>
+
+</p-table>
+<h1>Filter</h1>
+<hr>
+<form class="flex align-items-center gap-1" [formGroup]="filterForm">
+  <p-checkbox
+      formControlName="hasDrivesUploading"
+      value="true"
+      inputId="ny" />
+  <label for="ny">New York</label>
+
+  <input type="text" name="" id="">
+  <input type="checkbox" name="" id="">
+  <input type="checkbox" name="" id="">
+  <br>
+  <h2>Exppiration</h2>
+  <label for="from"></label>
+  <input type="date" name="" id="">
+  <label for="to"></label>
+  <input type="date" name="" id="">
+</form>

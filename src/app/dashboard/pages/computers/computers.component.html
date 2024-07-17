@@ -1,1 +1,100 @@
-<p>computers works!</p>
+<h1 class="text-center text-2xl font-extrabold text-gray-900 sm:text-3xl md:text-5xl mb-2">Computer List</h1>
+<p-table
+[value]="computers"
+[tableStyle]="{'min-width': '60rem'}"
+styleClass="p-datatable-striped" >
+  <ng-template pTemplate="header">
+      <tr>
+          <th pSortableColumn="email" >
+            <div class="flex align-items-center">
+              Email
+              <p-sortIcon field="email" />
+              <p-columnFilter type="text" field="email" display="menu" class="items-center" />
+            </div>
+          </th>
+          <th pSortableColumn="subscriptionExpirationDate" >Expiration <p-sortIcon field="subscriptionExpirationDate" />    </th>
+          <th pSortableColumn="status" >Status <p-sortIcon field="status" /></th>
+          <th pSortableColumn="licenseId" >License <p-sortIcon field="licenseId" /></th>
+          <th pSortableColumn="numberOfDrives" >Drives <p-sortIcon field="numberOfDrives" /></th>
+        <th pSortableColumn="drivesTotalLength" >Size <p-sortIcon field="drivesTotalLength" /></th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-computer>
+      <tr>
+          <td>{{ computer.email }}</td>
+          <td>{{ computer.subscriptionExpirationDate | date:'mediumDate' }}</td>
+          <td>
+            @switch (computer.status) {
+              @case ('Danger') {
+                <i class="fas fa-exclamation-circle check-danger"></i>
+              }
+              @case ('Review') {
+                <i class="fas fa-question-circle check-warning" ></i>
+              }
+              @case ('Syncing') {
+                <i class="fas fa-sync check-review"></i>
+              }
+              @case ('Correct') {
+                <i class="fas fa-check-circle check-correct" ></i>
+              }
+             }
+            {{ computer.status }}</td>
+          <td>{{ computer.licenseId }}</td>
+          <td>{{ computer.numberOfDrives }}</td>
+          <td>{{ computer.drivesTotalLength | Byte}}</td>
+        </tr>
+  </ng-template>
+</p-table>
+
+<p-paginator
+  (onPageChange)="onPageChange($event)"
+  [first]="first"
+  [rows]="rows"
+  [totalRecords]="totalRecords"
+  [rowsPerPageOptions]="[10, 25, 50, 100]"
+  [showCurrentPageReport]="true"
+  [showPageLinks]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords}">
+</p-paginator>
+<div class="my-4">
+<form [formGroup]="formFilters" (ngSubmit)="onSave()">
+  <p-floatLabel>
+    <input type="text" pInputText formControlName="text" id="freeText" />
+    <label for="freeText">Free text</label>
+  </p-floatLabel>
+  <div class="flex items-center content-center">
+    <p-inputSwitch formControlName="expired" id="expired" />
+    <label for="expired">Expired</label>
+  </div>
+  <div>
+    <p-inputSwitch formControlName="active" id="active"/>
+    <label for="active">Active</label>
+  </div>
+  <p-floatLabel>
+    <p-calendar formControlName="expFrom"
+  [maxDate]="maxDate"
+  [iconDisplay]="'input'"
+  [showIcon]="true"
+  inputId="expFrom"
+  [readonlyInput]="true"
+  [showButtonBar]="true"
+  />
+  <label for="expFrom">From</label>
+  </p-floatLabel>
+  <p-floatLabel>
+  <p-calendar formControlName="expTo"
+
+  [iconDisplay]="'input'"
+  [showIcon]="true"
+  inputId="expTo"
+  [readonlyInput]="true"
+  [showButtonBar]="true"/>
+
+  <label for="expTo">To</label>
+  </p-floatLabel>
+  <p-button type="submit" label="Apply"
+class="middle none center mr-4 rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+ />
+</form>
+
+</div>
