@@ -1,9 +1,8 @@
-<h1 class="text-center text-2xl font-extrabold text-gray-900 sm:text-3xl md:text-5xl mb-2">Users List</h1>
+<section class="user-list p-2">
+  <h1 class="title-header text-center text-2xl font-extrabold text-gray-900 sm:text-3xl md:text-5xl mb-2">User List</h1>
+<section class="table-users">
 <p-table
   [value]="users"
-  [rows]="10"
-  [rowsPerPageOptions]="[10, 25, 50]"
-  [paginator]="true"
   selectionMode="single"
   [(selection)]="selectedUser"
   dataKey="email"
@@ -11,9 +10,6 @@
   (onRowUnselect)="onRowUnselect($event)"
   [tableStyle]="{'min-width': '60rem'}"
   styleClass="p-datatable-striped">
-
-
-
   <ng-template pTemplate="header">
     <tr>
       <th pSortableColumn="email">Email <p-sortIcon field="Email" /></th>
@@ -32,7 +28,6 @@
       <th></th>
     </tr>
   </ng-template>
-
   <ng-template pTemplate="body" let-user>
     <tr [pSelectableRow]="user">
       <td>{{ user.email }}</td>
@@ -48,24 +43,52 @@
       <td>{{ user.sourceIp }}</td>
     </tr>
   </ng-template>
-
 </p-table>
-<h1>Filter</h1>
-<hr>
-<form class="flex align-items-center gap-1" [formGroup]="filterForm">
-  <p-checkbox
-      formControlName="hasDrivesUploading"
-      value="true"
-      inputId="ny" />
-  <label for="ny">New York</label>
+<p-paginator class="paginator-computers"
+  (onPageChange)="onPageChange($event)"
+  [first]="first"
+  [rows]="rows"
+  [totalRecords]="totalRecords"
+  [rowsPerPageOptions]="[10, 25, 50, 100]"
+  [showCurrentPageReport]="true"
+  [showPageLinks]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords}">
+</p-paginator>
+</section>
+<div class="filters-users">
+<h1 class="text-center text-2xl font-extrabold text-gray-900 mb-2">Filters</h1>
 
-  <input type="text" name="" id="">
-  <input type="checkbox" name="" id="">
-  <input type="checkbox" name="" id="">
-  <br>
-  <h2>Exppiration</h2>
-  <label for="from"></label>
-  <input type="date" name="" id="">
-  <label for="to"></label>
-  <input type="date" name="" id="">
+<form [formGroup]="filterForm" (ngSubmit)="onSave()" class="flex flex-col gap-4 items-center mx-4  ">
+  <p-floatLabel>
+    <input type="text" pInputText formControlName="freeText" id="freeText" class="text-xl"/>
+    <label for="freeText">Free text</label>
+  </p-floatLabel>
+  <div class="flex items-center with-70prcent justify-between ">
+    <label for="hasDrivesUploading">Uploading</label>
+    <p-inputSwitch formControlName="hasDrivesUploading" id="hasDrivesUploading" class="flex"/>
+  </div>
+  <div class="flex items-center with-70prcent justify-between ">
+    <label for="hasDrivesProcessingUpload">Processing</label>
+    <p-inputSwitch formControlName="hasDrivesProcessingUpload" id="hasDrivesProcessingUpload" class="flex"/>
+  </div>
+  <div class="flex items-center with-70prcent justify-between ">
+    <label for="hasDrivesBrowsable">Browseable</label>
+    <p-inputSwitch formControlName="hasDrivesBrowsable" id="hasDrivesBrowsable" class="flex"/>
+  </div>
+  <div class="flex items-center with-70prcent justify-between ">
+    <label for="showDeleted">Show Deleted</label>
+    <p-inputSwitch formControlName="showDeleted" id="showDeleted" class="flex"/>
+  </div>
+  <p-dropdown class="with-80prcent"
+        formControlName="connectionStatus"
+        [options]="connectionStatusOptions"
+        optionLabel="label"
+        placeholder="Connection Status" />
+
+
+  <p-button type="submit" label="Apply"
+class="middle none center mr-4 rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+ />
 </form>
+</div>
+</section>

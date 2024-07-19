@@ -1,1 +1,32 @@
 
+.computer-list {
+  display: grid;
+
+  gap: 0.5rem;
+  grid-template-columns: 1fr 1fr 1fr minmax(10rem, 18rem);
+  grid-template-rows: 0.2fr minmax(100px, auto);
+  grid-template-areas:
+    "title-header title-header title-header title-header"
+    "table-computers table-computers table-computers filters-computers"
+}
+.title-header {
+    grid-area: title-header;
+    text-align: center;
+}
+.table-computers{
+    grid-area: table-computers;
+}
+.filters-computers{
+    grid-area: filters-computers;
+}
+.with-70prcent {
+    width: 70%;
+}
+.with-80prcent {
+  width: 80%;
+}
+.filters-computers form {
+  position: sticky;
+  top: 2rem;
+  right: 0;
+}

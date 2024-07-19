@@ -32,6 +32,10 @@ html, body {
   padding: 0px;
   margin: 0px;
 }
+.with-80prcent .p-dropdown {
+  width: 100%;
+}
+
 
 .check-verified {
   color: #10b031;
@@ -90,3 +94,24 @@ html, body {
 .p-column-filter-menu .p-column-filter-menu-button .p-icon-wrapper {
   display: flex;
 }
+.p-menuitem-content a.p-menuitem-contenta.p-menuitem-link-acitve {
+  background: aqua;
+}
+.computer-list table thead tr th:first-child {
+  border-top-left-radius: 6px;
+}
+.computer-list table thead tr th:last-child {
+  border-top-right-radius: 6px;
+}
+.user-list table thead:first-child tr:first-child th:first-child {
+  border-top-left-radius: 6px;
+}
+.user-list table thead:first-child tr:first-child th:last-child {
+  border-top-right-radius: 6px;
+}
+.p-paginator {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+

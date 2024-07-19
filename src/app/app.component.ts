@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { PrimeNGConfig } from 'primeng/api';
 
 import { StorageService } from './services/storage.service';
 import { UserListComponent } from './dashboard/pages/user-list/user-list.component';
@@ -26,9 +27,10 @@ export class AppComponent {
   public storageService = inject(StorageService);
   public router = inject(Router);
 
+  constructor( private primengConfig: PrimeNGConfig ) {}
 
-  ngOnInit(): void {
-    console.log('on it appComponent');
+  ngOnInit() {
+      this.primengConfig.ripple = true;
   }
 
 
