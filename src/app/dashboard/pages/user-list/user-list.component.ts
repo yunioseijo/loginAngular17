@@ -1,14 +1,18 @@
 import { Component, inject, NgModule, OnInit, ViewChild } from '@angular/core';
 import { ConnectionStatus, FilteredUsers, GetUsersRequest, UserService } from '../../../PruebasApi';
 import { PrimeNgModule } from '../../../prime-ng/prime-ng.module';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MessageService } from 'primeng/api';
 import { InputTextModule } from 'primeng/inputtext';
-import { DatePipe } from '@angular/common';
+import { DatePipe, CommonModule } from '@angular/common';
 
 import { Table } from 'primeng/table';
 
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { SortDirective } from '../../directives/sort.directive';
+import { Router } from '@angular/router';
 
 interface FilteredUsersWithDate extends Omit<FilteredUsers, 'createdDate'> {
   createdDate: Date | null;
@@ -17,23 +21,30 @@ interface FilteredUsersWithDate extends Omit<FilteredUsers, 'createdDate'> {
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [PrimeNgModule, DatePipe, InputTextModule,FormsModule, ReactiveFormsModule,PaginatorModule ],
+  imports: [CommonModule,PrimeNgModule, DatePipe, InputTextModule,FormsModule, ReactiveFormsModule,PaginatorModule,SortDirective, ProgressBarModule,ProgressSpinnerModule ],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css',
   providers: [MessageService]
 })
 export class UserListComponent implements OnInit {
+  router: Router = inject(Router);
+onRowSelectClick(user: FilteredUsersWithDate) {
+console.log(`onRowSlectClick: ${JSON.stringify(user)}`);
+this.router.navigate(['dashboard/users', user.userId]);
+
+}
   //Dependency Injection
   private userService = inject(UserService);
   private messageService = inject(MessageService);
   private fb = inject(FormBuilder);
 
+  //Properties
+  loading: boolean = true;
   maxDate: Date | undefined;
   filterForm: FormGroup;
   first: number = 0;
   rows: number = 10;
   totalRecords: number = 0;
-  //Properties
   users: FilteredUsersWithDate[] = [];
   selectedUser!: FilteredUsersWithDate;
   usersRequest:GetUsersRequest = {
@@ -71,9 +82,20 @@ export class UserListComponent implements OnInit {
       pageSize: this.rows,
       page: this.first / this.rows + 1,
     };
+
+    this.loadUsers();
+  }
+  onSortChange($event: { field: string; order: number }) {
+    // console.log(`onSortChange: ${$event.field} ${$event.order}`);
+    this.usersRequest.order = {
+      ...this.usersRequest.order,
+      fieldName: $event.field,
+      isAscending: $event.order === 1,
+    };
     this.loadUsers();
   }
   loadUsers() {
+    this.loading = true;
     this.userService.userGetUsersPost(this.usersRequest)
     .subscribe(res => {
       if (res && res.items) {
@@ -84,8 +106,14 @@ export class UserListComponent implements OnInit {
         this.totalRecords = res.totalItemCount
             ? res.totalItemCount
             : 0;
+        this.loading = false;
       }
-    });
+    },
+    error => {
+      console.log(`Eroor en loading`)
+      this.loading = true;
+    }
+  );
   }
 
   onSave(): void {
@@ -106,9 +134,10 @@ export class UserListComponent implements OnInit {
     this.loadUsers();
   }
   onRowSelect(event: any) {
-    console.log(`on row select ${event.data.name}`);
-    this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: event.data.name });
-}
+    console.log(`on row select ${JSON.stringify(event)}`);
+    redirectTo: `users/${event.data.userId}`;
+    this.messageService.add({ severity: 'info', summary: 'User Selected', detail: event.data.name });
+  }
 
 onRowUnselect(event: any) {
     this.messageService.add({ severity: 'info', summary: 'Product Unselected', detail: event.data.name });

@@ -10,6 +10,7 @@ export const DASHBOARD_ROUTES: Routes = [
   children: [
     { path: 'users', component: UserListComponent,canActivate: [authGuard], },
     { path: 'computers', component: ComputersComponent,canActivate: [authGuard], },
+    { path: 'users/:userId', component: UserDetailsComponent,canActivate: [authGuard], },
   ]
   }
 

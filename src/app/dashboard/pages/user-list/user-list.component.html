@@ -1,6 +1,20 @@
-<section class="user-list p-2">
+<section class=" p-2" [ngClass]="{'user-list': !loading}">
   <h1 class="title-header text-center text-2xl font-extrabold text-gray-900 sm:text-3xl md:text-5xl mb-2">User List</h1>
+  @if (loading) {
+    <p-progressBar class="text-center" mode="indeterminate" [style]="{ height: '6px' }" />
+    <!-- <p-progressSpinner
+    styleClass="w-2rem h-2rem text-center"
+    strokeWidth="8"
+    fill="var(--surface-ground)"
+    animationDuration=".5s" /> -->
+  }
+
+  @else {
 <section class="table-users">
+
+
+
+
 <p-table
   [value]="users"
   selectionMode="single"
@@ -12,24 +26,33 @@
   styleClass="p-datatable-striped">
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="email">Email <p-sortIcon field="Email" /></th>
-      <th pSortableColumn="createdDate">createdDate <p-sortIcon field="createdDate" /></th>
-      <th pSortableColumn="culture">culture <p-sortIcon field="culture" /></th>
-      <th pSortableColumn="computersCount">Computers Count <p-sortIcon field="computersCount" /></th>
+      <th>Email<span appSort [sortField]="'Email'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
+      <th>Created Date<span appSort [sortField]="'CreatedDate'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
+      <th>Culture <span appSort [sortField]="'Culture'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
+      <th><div class="flex">
+        Computers Count <span appSort [sortField]="'ComputersCount'" [typo]="'number'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span>
+      </div>
+      </th>
       <th >Drives </th>
-      <th pSortableColumn="sourceIp">sourceIp <p-sortIcon field="sourceIp" /></th>
+      <th>
+        <div class="flex">
+          sourceIp <span appSort [sortField]="'SourceIp'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span>
+        </div>
+      </th>
     </tr>
-    <tr>
+    <!-- <tr>
       <th> <p-columnFilter type="text" field="email" [showClearButton]="false" />  </th>
       <th> <p-columnFilter type="date" field="createdDate" [showClearButton]="true" />  </th>
       <th> <p-columnFilter type="text" field="culture" [showClearButton]="false" />  </th>
       <th> <p-columnFilter type="text" field="computersCount" [showClearButton]="false" />  </th>
       <th></th>
       <th></th>
-    </tr>
+    </tr> -->
   </ng-template>
   <ng-template pTemplate="body" let-user>
-    <tr [pSelectableRow]="user">
+    <tr [pSelectableRow]="user"
+    (click)="onRowSelectClick(user)"
+    >
       <td>{{ user.email }}</td>
       <td>{{ user.createdDate | date:'mediumDate' }}</td>
       <td>{{ user.culture }}</td>
@@ -54,7 +77,9 @@
   [showPageLinks]="true"
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords}">
 </p-paginator>
+
 </section>
+
 <div class="filters-users">
 <h1 class="text-center text-2xl font-extrabold text-gray-900 mb-2">Filters</h1>
 
@@ -91,4 +116,5 @@ class="middle none center mr-4 rounded-lg bg-blue-500 py-3 px-6 font-sans text-x
  />
 </form>
 </div>
+  }
 </section>

@@ -6,7 +6,10 @@ import { Pipe, type PipeTransform } from '@angular/core';
 })
 export class BytePipe implements PipeTransform {
 
-  transform(bytes: number, precision: number = 1): string {
+  transform(bytes: number | undefined, precision: number = 1): string {
+    if (bytes === undefined) {
+      return 'Invalid input';
+  }
     if (isNaN(parseFloat(String(bytes))) || !isFinite(bytes)) {
       return '-';
     }

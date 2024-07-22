@@ -1,0 +1,26 @@
+.user-details {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(18rem, 25rem) auto;
+  grid-template-rows: minmax(100px, auto);
+  grid-template-areas:
+
+    "user-info user-computers  "
+}
+.user-info {
+    grid-area: user-info;
+    text-align: center;
+}
+.user-computers{
+    grid-area: user-computers;
+}
+
+.with-70prcent {
+    width: 70%;
+}
+
+.with-80prcent {
+width: 80%;
+}
+
+

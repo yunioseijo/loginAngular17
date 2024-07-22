@@ -1,0 +1,44 @@
+
+
+<p-accordionTab [header]="computerDetails.alias ?? computerDetails.hardwareInfo?.machineName ?? ''">
+  <h3>Hardware Info</h3>
+  <div >
+    <div >
+        <p>{{computerDetails.computerId}}</p>
+        <i class="far fa-copy icon-left-margin"></i>
+    </div>
+    <div >
+        <div >
+            <div >
+                <p ><span class="">'UserDetail.CreationDate': </span> <span class="">{{computerDetails.creationDate | date: 'mediumDate' }} {{computerDetails.creationDate | date: 'mediumTime' }}</span></p>
+            </div>
+            <div >
+                <p ><span >'UserDetail.MachineName': </span> <span >{{computerDetails.hardwareInfo?.machineName}}</span></p>
+            </div>
+            <div >
+                <p ><span >'UserDetail.OperatingSystem': </span> <span >{{computerDetails.hardwareInfo?.operatingSystem | limitTo:40}}</span></p>
+            </div>
+            <div >
+                <p ><span >'UserDetail.Motherboard': </span> <span >{{computerDetails.hardwareInfo?.motherboard | limitTo:40}} </span></p>
+            </div>
+        </div>
+        <div >
+            <div >
+                <p ><span >'UserDetail.Processor': </span> <span >{{computerDetails.hardwareInfo?.processor | limitTo:40}}</span></p>
+            </div>
+            <div >
+                <p ><span >'UserDetail.RamSize': </span> <span >{{computerDetails.hardwareInfo?.ramSize | Byte}}</span></p>
+            </div>
+            <div >
+                <p ><span >'UserDetail.SubscriptionExpirationDate': </span> <span >{{computerDetails.subscriptionExpirationDate | date: 'mediumDate'}} {{computerDetails.subscriptionExpirationDate | date: 'mediumTime'}}</span></p>
+            </div>
+            <div >
+                <!-- <p ><span class="md-body-2">{{'UserDetail.CurrentSoftwareVersion' | translate}}: </span> <span >{{computerDetails?.currentSoftwareVersion | date: 'mediumDate'}}</span></p> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</p-accordionTab>
