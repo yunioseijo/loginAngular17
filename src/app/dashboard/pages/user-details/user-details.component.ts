@@ -7,18 +7,20 @@ import { ComputerService, GetUserComputersResponse, GetUserDetailsResponse, User
 import { GetUserDetailsRequest } from './../../../PruebasApi/model/getUserDetailsRequest';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { switchMap } from 'rxjs';
+import { DetailsUserComponent } from "../../components/details-user/details-user.component";
 
 @Component({
   selector: 'app-user-details',
   standalone: true,
   imports: [
-     AccordionModule,
-     CommonModule,
-     ComputerDetailsComponent,
-     ComputerDetailsComponent,
-     ProgressBarModule,
+    AccordionModule,
+    CommonModule,
+    ComputerDetailsComponent,
+    ComputerDetailsComponent,
+    ProgressBarModule,
     RouterOutlet,
-    ],
+    DetailsUserComponent
+],
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.css'
 })

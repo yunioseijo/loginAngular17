@@ -4,6 +4,7 @@ import { GetUserComputersResponse } from '../../../PruebasApi';
 import { AccordionModule } from 'primeng/accordion';
 import { LimitToPipe } from '../../../Pipes/limitTo.pipe';
 import { BytePipe } from '../../../Pipes/byte.pipe';
+import { DriveDetailsComponent } from "../drive-details/drive-details.component";
 
 @Component({
   selector: 'computer-details',
@@ -13,7 +14,8 @@ import { BytePipe } from '../../../Pipes/byte.pipe';
     AccordionModule,
     LimitToPipe,
     BytePipe,
-  ],
+    DriveDetailsComponent
+],
   templateUrl: './computerDetails.component.html',
   styleUrl: './computerDetails.component.css',
 

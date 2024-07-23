@@ -1,0 +1,30 @@
+<section class="disks">
+  <div class="flex gap-2 items-center" >
+      <i class="far fa-hdd"></i>
+      <p class="md-body-2 no-margin clickable">{{drive.model}} </p>
+  </div>
+  <div  class="clickable flex gap-2 items-center" ng-click="vm.copyToClipboard(drive.driveId)">
+      <p class="md-body-1 no-margin"> {{drive.driveId}}</p>
+      <i class="far fa-copy icon-left-margin"></i>
+  </div>
+  <div class="columns-1 md:columns-2" >
+    <p><span class="font-bold">Drive Snapshot Id: </span><span>{{drive.driveSnapshotId}}</span></p>
+    <p><span class="font-bold">Model:</span><span>{{drive.model}}</span></p>
+    <p><span class="font-bold">Length in Gigas: </span><span>{{drive.lengthInGigas}}</span></p>
+    <p><span class="font-bold">Is removable: </span><span>{{drive.isRemovable}}</span></p>
+    <p><span class="font-bold">Finalize Upload Date: </span><span>{{drive.finalizeUploadDate | date: 'mediumDate'}}</span></p>
+  </div>
+  <div class="list-partitions my-2">
+    @if(drive.partitions && drive.partitions.length > 0){
+      <h3>List of Partitions</h3>
+      @for (partition of drive.partitions; track $index) {
+        <div class=" px-2 flex gap-1">
+          <span class="bg-black text-white rounded-2xl px-2 flex gap-1">{{partition.letter}}
+          ({{partition.label}})
+          {{partition.length | Byte}}</span>
+        </div>
+      }
+    }
+  </div>
+  <hr class="mb-2">
+</section>

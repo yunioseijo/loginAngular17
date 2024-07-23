@@ -14,7 +14,9 @@ selectionMode="single"
 styleClass="p-datatable-striped" >
   <ng-template pTemplate="header">
       <tr>
-          <th>Email<span appSort [sortField]="'Email'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
+          <th>Name<span appSort [sortField]="'MachineName'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
+          <th>ID<span appSort [sortField]="'ComputerId'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
+          <th>Email<span appSort [sortField]="'Email'" [typo]="'text'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
           <th >Expiration <span appSort [sortField]="'SubscriptionExpirationDate'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span>  </th>
           <th>Status <span appSort [sortField]="'Status'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
           <th>License<span appSort [sortField]="'LicenseId'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
@@ -25,6 +27,14 @@ styleClass="p-datatable-striped" >
   <ng-template pTemplate="body" let-computer>
       <tr [pSelectableRow]="computer"
       (click)="onRowSelectClick(computer)">
+      @if (computer.alias) {
+        <td>{{ computer.alias}}</td>
+
+      }
+      @else{
+        <td>{{ computer.machineName}}</td>
+      }
+          <td>{{ computer.computerId }}</td>
           <td>{{ computer.email }}</td>
           <td>{{ computer.subscriptionExpirationDate | date:'mediumDate' }}</td>
           <td>
