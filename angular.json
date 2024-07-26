@@ -61,7 +61,7 @@
               "buildTarget": "loginAngular17:build:production"
             },
             "development": {
-              "buildTarget": "loginAngular17:build:development",
+              "buildTarget": "loginAngular17:build:development"
 
             }
           },

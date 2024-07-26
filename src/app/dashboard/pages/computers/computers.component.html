@@ -1,7 +1,7 @@
 <section class=" p-2" [ngClass]="{'computer-list': !loading}">
 <h1 class="title-header text-center text-2xl font-extrabold text-gray-900 sm:text-3xl md:text-5xl mb-2">Computer List</h1>
 @if (loading) {
-  <p-progressBar class="text-center" mode="indeterminate" [style]="{ height: '6px' }" />
+  <p-progressBar class="text-center" mode="indeterminate"  [style]="{ height: '6px'}" />
 
 }
 @else {
@@ -10,18 +10,23 @@
 [value]="computers"
 selectionMode="single"
 (onRowSelect)="onRowSelect($event)"
+[sortField]="sortField"
+[sortOrder]="sortOrder"
+(onSort)="onSortChange($event)"
 [tableStyle]="{'min-width': '60rem'}"
 styleClass="p-datatable-striped" >
   <ng-template pTemplate="header">
       <tr>
-          <th>Name<span appSort [sortField]="'MachineName'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
-          <th>ID<span appSort [sortField]="'ComputerId'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
-          <th>Email<span appSort [sortField]="'Email'" [typo]="'text'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
-          <th >Expiration <span appSort [sortField]="'SubscriptionExpirationDate'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span>  </th>
-          <th>Status <span appSort [sortField]="'Status'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
-          <th>License<span appSort [sortField]="'LicenseId'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
-          <th>Drives <span appSort [sortField]="'NumberOfDrives'" [typo]="'number'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
-          <th>Size <span appSort [sortField]="'DrivesTotalLength'" [typo]="'number'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
+          <th pSortableColumn="MachineName"><div class="flex items-center"> Name <p-sortIcon field="MachineName" /></div>
+            <!-- <span appSort [sortField]="'MachineName'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span> -->
+          </th>
+          <th pSortableColumn="ComputerId"> <div class="flex items-center">ID <p-sortIcon field="ComputerId" /></div></th>
+          <th pSortableColumn="Email"><div class="flex items-center"> Email <p-sortIcon field="Email" /></div></th>
+          <th pSortableColumn="SubscriptionExpirationDate"><div class="flex items-center"> Expiration <p-sortIcon field="SubscriptionExpirationDate" /></div></th>
+          <th pSortableColumn="Status"><div class="flex items-center"> Status <p-sortIcon field="Status"/></div> </th>
+          <th pSortableColumn="LicenseId"><div class="flex items-center"> License <p-sortIcon field="LicenseId"/></div></th>
+          <th pSortableColumn="NumberOfDrives"><div class="flex items-center"> Drives <p-sortIcon field="NumberOfDrives"/></div></th>
+          <th pSortableColumn="DrivesTotalLength"><div class="flex items-center"> Size <p-sortIcon field="DrivesTotalLength"/></div></th>
       </tr>
   </ng-template>
   <ng-template pTemplate="body" let-computer>
@@ -83,7 +88,7 @@ styleClass="p-datatable-striped" >
   </div>
   <div class="flex items-center with-70prcent justify-between ">
     <label for="active">Active</label>
-    <p-inputSwitch formControlName="active" id="active" class="flex"/>
+    <p-inputSwitch formControlName="active" id="active" class="flex" p-inputswitch-checked="bg-primary-color"/>
   </div>
   <div class="flex items-center flex-col gap-4 ">
     <h1 class="text-center text-xl font-bold text-gray-900 ">Expiration</h1>
@@ -108,9 +113,9 @@ styleClass="p-datatable-striped" >
   <label for="expTo">To</label>
   </p-floatLabel>
 </div>
-  <p-button type="submit" label="Apply"
-class="middle none center mr-4 rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
- />
+  <button type="submit"
+class="middle none center mr-4 rounded-lg bg-primary-color py-3 px-6 font-sans text-xs font-bold uppercase text-black shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+ >Apply</button>
 </form>
 
 </div>

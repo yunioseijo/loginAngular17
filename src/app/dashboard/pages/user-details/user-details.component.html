@@ -1,6 +1,6 @@
 <div class="user-details mt-8 mx-8">
 
-  <app-details-user [userDetails]="userDetails"></app-details-user>
+  <app-details-user [userDetails]="userInfo() || {}"></app-details-user>
 
 <section class="user-computers">
   <p-accordion [activeIndex]="0">

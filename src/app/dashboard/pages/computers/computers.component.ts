@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { SortDirective } from '../../directives/sort.directive';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { Router } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
 
 interface FilteredComputerWithDate
   extends Omit<FilteredComputer, 'subscriptionExpirationDate'> {
@@ -33,18 +34,21 @@ interface FilteredComputerWithDate
   styleUrl: './computers.component.css',
 })
 export class ComputersComponent implements OnInit {
-
-  computers: FilteredComputerWithDate[] = [];
+  //Dependency Injection
   private computerService = inject(ComputerService);
   private fb = inject(FormBuilder);
-  router: Router = inject(Router);
+  private router: Router = inject(Router);
 
+  //Properties
   loading: boolean = true;
   maxDate: Date | undefined;
   formFilters: FormGroup;
   first: number = 0;
   rows: number = 10;
   totalRecords: number = 0;
+  sortField: string = "";
+  sortOrder: number = 1;
+  computers: FilteredComputerWithDate[] = [];
   // selectedUser!: FilteredUsers;
 
   getPartnerComputersRequest: GetPartnerComputersRequest = {
@@ -62,6 +66,7 @@ export class ComputersComponent implements OnInit {
   };
   rowsPerPageOptions = [10, 25, 50, 100];
   private subscriptions: Subscription[] = [];
+
 
   constructor() {
     this.formFilters = this.fb.group({
@@ -88,13 +93,16 @@ export class ComputersComponent implements OnInit {
     }
 
   onSortChange($event: { field: string; order: number }) {
-    // console.log(`onSortChange: ${$event.field} ${$event.order}`);
-    this.getPartnerComputersRequest.order = {
-      ...this.getPartnerComputersRequest.order,
-      fieldName: $event.field,
-      isAscending: $event.order === 1,
-    };
-    this.loadComputers();
+    if(this.sortField !== $event.field || this.sortOrder !== $event.order) {
+      this.sortField = $event.field;
+      this.sortOrder = $event.order;
+      this.getPartnerComputersRequest.order = {
+        ...this.getPartnerComputersRequest.order,
+        fieldName: $event.field,
+        isAscending: $event.order===1,
+      };
+      this.loadComputers();
+    }
   }
 
   toCapitalCase(word: string) {

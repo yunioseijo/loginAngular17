@@ -7,7 +7,7 @@ import { MessageService } from 'primeng/api';
 import { InputTextModule } from 'primeng/inputtext';
 import { DatePipe, CommonModule } from '@angular/common';
 
-import { Table } from 'primeng/table';
+import { Table, TableFilterEvent } from 'primeng/table';
 
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
@@ -27,18 +27,18 @@ interface FilteredUsersWithDate extends Omit<FilteredUsers, 'createdDate'> {
   providers: [MessageService]
 })
 export class UserListComponent implements OnInit {
-  router: Router = inject(Router);
-onRowSelectClick(user: FilteredUsersWithDate) {
-console.log(`onRowSlectClick: ${JSON.stringify(user)}`);
-this.router.navigate(['dashboard/users', user.userId]);
 
-}
+
   //Dependency Injection
+  private router: Router = inject(Router);
   private userService = inject(UserService);
   private messageService = inject(MessageService);
   private fb = inject(FormBuilder);
 
   //Properties
+  sortField: string = "";
+  sortOrder: number = 1;
+  filter: string = "";
   loading: boolean = true;
   maxDate: Date | undefined;
   filterForm: FormGroup;
@@ -85,15 +85,43 @@ this.router.navigate(['dashboard/users', user.userId]);
 
     this.loadUsers();
   }
-  onSortChange($event: { field: string; order: number }) {
-    // console.log(`onSortChange: ${$event.field} ${$event.order}`);
-    this.usersRequest.order = {
-      ...this.usersRequest.order,
-      fieldName: $event.field,
-      isAscending: $event.order === 1,
-    };
-    this.loadUsers();
+  onRowSelectClick(user: FilteredUsersWithDate) {
+    console.log(`onRowSlectClick: ${JSON.stringify(user)}`);
+    this.router.navigate(['dashboard/users', user.userId]);
+
   }
+  onSortChange($event: any) {
+    if(this.sortField !== $event.field || this.sortOrder !== $event.order) {
+      this.sortField = $event.field;
+      this.sortOrder = $event.order;
+      this.usersRequest.order = {
+        ...this.usersRequest.order,
+        fieldName: this.sortField,
+        isAscending: this.sortOrder === 1,
+      };
+      this.loadUsers();
+    }
+  }
+  onFilterChange(event: TableFilterEvent) {
+    // console.log(`FilterEvent ${JSON.stringify(event)}`);
+    if(!event.filters)
+      return null;
+    for(const key in event.filters){
+      const filterMetadata = event.filters[key];
+      console.log(`filterMetadata ${JSON.stringify(filterMetadata)}`);
+      if (filterMetadata && filterMetadata.value !== null) {
+        this.usersRequest.filter = {
+          ...this.usersRequest.filter,
+          [key]: filterMetadata.value,
+        };
+        console.log(key, filterMetadata.value);
+        console.log('userRequest after filter',this.usersRequest)
+        // return { key, value: filterMetadata.value, matchMode: filterMetadata.matchMode || '' };
+        }
+      }
+      return {}
+    }
+
   loadUsers() {
     this.loading = true;
     this.userService.userGetUsersPost(this.usersRequest)

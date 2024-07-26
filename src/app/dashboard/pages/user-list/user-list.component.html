@@ -23,27 +23,33 @@
   (onRowSelect)="onRowSelect($event)"
   (onRowUnselect)="onRowUnselect($event)"
   [tableStyle]="{'min-width': '60rem'}"
-  styleClass="p-datatable-striped">
+  styleClass="p-datatable-striped"
+  [sortField]="sortField"
+  [sortOrder]="sortOrder"
+  (onSort)="onSortChange($event)"
+  (onFilter)="onFilterChange($event)"
+  [globalFilterFields]="['email', 'name', 'culture']"
+  >
+
   <ng-template pTemplate="header">
     <tr>
-      <th>Email<span appSort [sortField]="'Email'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
-      <th>Created Date<span appSort [sortField]="'CreatedDate'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
-      <th>Culture <span appSort [sortField]="'Culture'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span></th>
-      <th><div class="flex">
-        Computers Count <span appSort [sortField]="'ComputersCount'" [typo]="'number'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span>
-      </div>
+      <th  pSortableColumn="Email">
+        <div class="flex items-center"> Email <p-sortIcon field="Email" />
+           <!-- <p-columnFilter type="text" field="email" display="menu" /> -->
+          </div>
+        <!-- <span appSort [sortField]="'Email'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span> -->
+
       </th>
-      <th >Drives </th>
-      <th>
-        <div class="flex">
-          sourceIp <span appSort [sortField]="'SourceIp'" class="cursor-pointer mx-2" (sortChanged)="onSortChange($event)"></span>
-        </div>
-      </th>
+      <th pSortableColumn="CreatedDate"><div class="flex items-center">Created Date <p-sortIcon field="CreatedDate" /></div>  </th>
+      <th pSortableColumn="Culture"><div class="flex items-center">Culture <p-sortIcon field="Culture" /> </div> </th>
+      <th pSortableColumn="ComputersCount"><div class="flex items-center"> Computers Count <p-sortIcon field="ComputersCount" /></div> </th>
+      <th><div class="flex items-center">Drives</div> </th>
+      <th> <div class="flex items-center"> SourceIp  </div> </th>
     </tr>
     <!-- <tr>
-      <th> <p-columnFilter type="text" field="email" [showClearButton]="false" />  </th>
+      <th> <p-columnFilter type="text" field="email" [showClearButton]="true" />  </th>
       <th> <p-columnFilter type="date" field="createdDate" [showClearButton]="true" />  </th>
-      <th> <p-columnFilter type="text" field="culture" [showClearButton]="false" />  </th>
+      <th> <p-columnFilter type="text" field="Culture" [showClearButton]="false" />  </th>
       <th> <p-columnFilter type="text" field="computersCount" [showClearButton]="false" />  </th>
       <th></th>
       <th></th>
@@ -111,9 +117,9 @@
         placeholder="Connection Status" />
 
 
-  <p-button type="submit" label="Apply"
-class="middle none center mr-4 rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
- />
+  <button type="submit"
+class="middle none center mr-4 rounded-lg bg-primary-color py-3 px-6 font-sans text-xs font-bold uppercase text-black shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+ >Apply</button>
 </form>
 </div>
   }

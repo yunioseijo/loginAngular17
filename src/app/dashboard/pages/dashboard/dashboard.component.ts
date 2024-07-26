@@ -17,13 +17,16 @@ export class DashboardComponent implements OnInit {
     this.items = [
         {
             label: 'Dashboard',
-            icon: 'pi pi-home'
+            icon: 'pi pi-home',
+            styleClass: 'rounded',
+            routerLink: 'dashboard'
         },
         {
             label: 'Computers',
             // icon: 'fa-fw fas fa-laptop',
             icon: 'pi pi-desktop',
-            routerLink: 'computers'
+            routerLink: 'computers',
+            styleClass: 'rounded',
         },
         {
           label: 'Users',

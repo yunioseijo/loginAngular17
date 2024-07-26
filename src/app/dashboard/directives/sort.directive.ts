@@ -1,15 +1,16 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Directive({
   selector: '[appSort]',
   standalone: true,
 })
-export class SortDirective implements OnInit {
+export class SortDirective implements OnInit, OnChanges {
   private htmlElement?: ElementRef<HTMLElement>;
   @Input() sortField: string = '';
   @Input() typo: string = 'text';
-  @Output() sortChanged = new EventEmitter<{ field: string, order: number }>();
-  private sortOrder = 1; // 1 for ascending, -1 for descending
+  @Input() order: boolean =  false;
+  @Output() sortChanged = new EventEmitter<{ field: string, order: boolean }>();
+  private sortOrder: boolean = false; // 1 for ascending, -1 for descending
   private isSorted = false; // Flag to track if sorting has been triggered
 
   constructor(private el: ElementRef) {
@@ -25,7 +26,23 @@ export class SortDirective implements OnInit {
 
   ngOnInit(): void {
     this.showInitialIcon();
+    console.log(`Se inicia el compoente de sort`);
+    console.log(`SortField: ${this.sortField} SortOrder: ${this.sortOrder}, Typo: ${this.typo}`);
+
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['sortField'] && !changes['sortField'].isFirstChange()) {
+      this.resetSortOrder();
+    }
+    console.log(`onChange`);
+  }
+
+  private resetSortOrder() {
+    this.isSorted = false;
+    this.sortOrder = false;
+    this.showInitialIcon();
+  }
+
 
   private showInitialIcon() {
     if (!this.htmlElement) return;
@@ -33,15 +50,16 @@ export class SortDirective implements OnInit {
   }
 
   private toggleSortOrderAndUpdateIcon() {
+
     if (!this.htmlElement) return;
     console.log(`SortField: ${this.sortField} SortOrder: ${this.sortOrder}, Typo: ${this.typo}`);
-    this.sortOrder = this.sortOrder * -1; // toggle sort order
+    this.sortOrder = !this.sortOrder; // toggle sort order
     switch (this.typo) {
       case 'text':
-        this.htmlElement.nativeElement.innerHTML = this.sortOrder !== 1 ? this.ascAZIcon : this.descZAIcon;
+        this.htmlElement.nativeElement.innerHTML = this.sortOrder ? this.ascAZIcon : this.descZAIcon;
         break;
       case 'number':
-        this.htmlElement.nativeElement.innerHTML = this.sortOrder !== 1 ? this.ascNumIcon : this.descNumIcon;
+        this.htmlElement.nativeElement.innerHTML = this.sortOrder ? this.ascNumIcon : this.descNumIcon;
         break;
     }
   }
@@ -50,9 +68,9 @@ export class SortDirective implements OnInit {
   onSort() {
     if (!this.isSorted) {
       this.isSorted = true;
-      this.sortOrder = -1; // Set initial sort order to descending
+      this.sortOrder = !this.sortOrder; // Set initial sort order to descending
     }
+    // this.toggleSortOrderAndUpdateIcon();
     this.sortChanged.emit({ field: this.sortField, order: this.sortOrder });
-    this.toggleSortOrderAndUpdateIcon();
   }
 }

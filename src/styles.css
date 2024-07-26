@@ -10,15 +10,26 @@
 :root {
     color-scheme: light dark;
     --primary-color:#94CE0D;
-    --secondary-color:#333333;;
+    --secondary-color:#333333;
+    --partition-active-clr-bg: #E9F5C5;
   }
   body {
     color: light-dark(#333b3c, #efefec);
     background-color: light-dark(#efedea, #223a2c);
   }
 
+.bg-primary-color{
+    background: var(--primary-color);
+}
 .bg-secondary-color{
     background: var(--secondary-color);
+}
+/*Sobre escribo los valores del tema */
+.p-progressbar .p-progressbar-value {
+  background:var(--primary-color);
+}
+.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+  background: var(--primary-color);
 }
 
 .group:hover .group-hover\:fill-secondary-color{
@@ -94,12 +105,21 @@ html, body {
 .p-column-filter-menu .p-column-filter-menu-button .p-icon-wrapper {
   display: flex;
 }
-.p-menuitem-content a.p-menuitem-contenta.p-menuitem-link-acitve {
-  background: aqua;
+.p-menuitem-content a.p-ripple.p-element.p-menuitem-link.p-menuitem-link-active {
+  background: var(--primary-color);
+  border-radius: 0.25rem;
+  font-weight: 700 !important;
 }
-.computer-list table thead tr th:first-child {
-  border-top-left-radius: 6px;
+.p-menubar .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content {
+  background: none;
 }
+.p-menubar .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover {
+  background-color: var(--partition-active-clr-bg);
+}
+ul.p-menubar-root-list{
+  gap: 0.3rem
+}
+
 .computer-list table thead tr th:last-child {
   border-top-right-radius: 6px;
 }
